@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
+.wrap{width:1200px;height:630px;position:relative;padding:64px 72px;display:flex;flex-direction:column;justify-content:center}
+.wrap::after{content:'';position:absolute;top:0;right:0;width:6px;height:100%;background:#CC0000}
+.badges{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.b{font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 16px;border-radius:4px}
+.br{background:rgba(204,0,0,.12);color:#FF2222;border:1px solid rgba(204,0,0,.35)}
+.bg{background:rgba(80,200,80,.10);color:#5cb85c;border:1px solid rgba(80,200,80,.25)}
+.bw{background:rgba(255,255,255,.06);color:#ccc;border:1px solid #333}
+.h1{font-size:104px;font-weight:900;letter-spacing:-4px;color:#fff;line-height:.95;margin-bottom:20px}
+.h1 .r{color:#CC0000}
+.tag{font-size:26px;color:#CCCCCC;line-height:1.4;max-width:900px;margin-bottom:34px;font-weight:500}
+.tag b{color:#fff}
+.strip{display:flex;gap:38px}
+.m{display:flex;flex-direction:column}
+.mn{font-size:40px;font-weight:900;color:#CC0000;letter-spacing:-1px;line-height:1}
+.mn.w{color:#fff}
+.ml{font-size:13px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-top:5px}
+.foot{position:absolute;bottom:34px;left:72px;font-size:15px;color:#666}
+</style></head><body>
+<div class="wrap">
+  <div class="badges">
+    <span class="b br">AMD Hackathon ACT II · Track 3 Unicorn</span>
+    <span class="b bg">🏆 ACT I — 1st Place AI Agents</span>
+    <span class="b bw">Gemma 27B · ROCm · Fireworks</span>
+  </div>
+  <div class="h1">REPO<span class="r">MIND</span> v3</div>
+  <div class="tag">The on-premises AI coding agent for enterprises that <b>banned Copilot</b> — runs air-gapped on a single <b>AMD MI300X</b>, migrates CUDA→ROCm, and keeps an <b>Ed25519-signed audit trail</b>.</div>
+  <div class="strip">
+    <div class="m"><div class="mn">256K</div><div class="ml">Context · 1 MI300X</div></div>
+    <div class="m"><div class="mn w">Gemma</div><div class="ml">Load-bearing triage</div></div>
+    <div class="m"><div class="mn w">39</div><div class="ml">CUDA→ROCm rules</div></div>
+    <div class="m"><div class="mn">0</div><div class="ml">Egress (air-gap)</div></div>
+    <div class="m"><div class="mn w">38</div><div class="ml">Passing tests</div></div>
+  </div>
+  <div class="foot">Sardor Razikov · Solo builder, Tashkent · github.com/SRKRZ23/repomind-v3</div>
+</div>
+</body></html>

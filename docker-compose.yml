@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - FIREWORKS_API_KEY=${FIREWORKS_API_KEY:-}
+      - VLLM_BASE_URL=${VLLM_BASE_URL:-http://localhost:8080}
+      - VLLM_API_KEY=${VLLM_API_KEY:-token-repomind}
+      - ROUTING_THRESHOLD=${ROUTING_THRESHOLD:-8000}
+      - AIR_GAP=${AIR_GAP:-0}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+      - API_KEY=${API_KEY:-}
+      - GEMMA_TRIAGE=${GEMMA_TRIAGE:-1}
+      - AUDIT_LOG=${AUDIT_LOG:-/app/data/repomind_audit.jsonl}
+    volumes:
+      - repo_cache:/tmp/repos
+      - audit_data:/app/data          # persistent, tamper-evident audit log (EU AI Act Art. 12)
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  # Offline demo backend: point at the mock vLLM so `docker compose --profile mock up`
+  # runs the whole SC-TIR loop with no GPU and no keys.
+  vllm-mock:
+    build: ./backend
+    command: ["python", "mock_vllm.py"]
+    profiles: ["mock"]
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  repo_cache:
+  audit_data:

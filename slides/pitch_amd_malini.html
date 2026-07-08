@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>REPOMIND v3 — For AMD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#0A0A0A}
+:root{--r:#CC0000;--ink:#0A0A0A;--g1:#3a3a3a;--g2:#6a6a6a;--g3:#9a9a9a;--line:#e6e6e6;--rf:#fbeaea}
+.slide{width:1920px;height:1080px;position:relative;background:#fff;padding:64px 84px;display:flex;flex-direction:column;overflow:hidden}
+.slide::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:var(--r)}
+.eye{font-size:14px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--r);margin-bottom:12px}
+.h1{font-size:118px;font-weight:900;letter-spacing:-5px;line-height:.92;color:var(--ink)}
+.h2{font-size:56px;font-weight:900;letter-spacing:-2.2px;line-height:1.02;color:var(--ink)}
+.h3{font-size:30px;font-weight:800;letter-spacing:-1px;color:var(--ink)}
+.r{color:var(--r)}
+.divr{width:64px;height:5px;background:var(--r);border-radius:3px;margin:18px 0 22px}
+.lead{font-size:24px;line-height:1.4;color:var(--g1);font-weight:500}
+.body{font-size:18px;line-height:1.55;color:var(--g1)}
+.sm{font-size:14px;color:var(--g2);line-height:1.5}
+.tiny{font-size:11.5px;color:var(--g3);line-height:1.5}
+.flex{display:flex}.g16{gap:16px}.g20{gap:20px}.g24{gap:24px}
+.full{flex:1}
+.badge{display:inline-flex;align-items:center;padding:8px 18px;border-radius:4px;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.b-r{background:var(--r);color:#fff}.b-o{background:#fff;color:var(--ink);border:2px solid var(--ink)}.b-ro{background:var(--rf);color:var(--r);border:2px solid var(--r)}
+.card{border:2px solid var(--line);border-radius:10px;padding:24px 28px;background:#fff}
+.card-r{border-color:var(--r);background:var(--rf)}.card-k{border-color:var(--ink)}
+.kpi{font-size:54px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--r)}.kpi.k{color:var(--ink)}
+.klbl{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--g2);margin-top:8px}
+.tag{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--r);margin-bottom:8px}
+.sn{position:absolute;bottom:30px;right:84px;font-size:15px;font-weight:800;color:var(--g3);letter-spacing:2px}
+.foot{position:absolute;bottom:30px;left:84px;font-size:13px;color:var(--g2)}
+.quote{border-left:5px solid var(--r);padding:12px 22px;background:var(--rf);font-size:18px;color:var(--ink);font-weight:600;border-radius:0 6px 6px 0}
+sup{font-size:.58em;color:var(--r);font-weight:800;vertical-align:super;line-height:0}
+.prow{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:16.5px;color:var(--g1)}
+.prow:last-child{border-bottom:none}.prow b{color:var(--ink)}
+.pv{color:var(--r);font-weight:800;white-space:nowrap;text-align:right}
+.mstrip{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.mi{flex:1;padding:14px 12px;border-right:2px solid var(--line);text-align:center}.mi:last-child{border-right:none}
+.mn{font-size:30px;font-weight:900;letter-spacing:-1px;color:var(--ink)}.mn.r{color:var(--r)}
+.ml{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--g2);margin-top:5px}
+.src{font-size:11px;color:var(--g3);line-height:1.5}.src b{color:var(--g2);font-weight:800}
+@media print{@page{size:1920px 1080px;margin:0}.slide{page-break-after:always}.slide:last-child{page-break-after:auto}}
+</style></head><body>
+
+<!-- ══ 1 · COVER ══ -->
+<div class="slide">
+  <div class="flex g16" style="flex-wrap:wrap;margin-bottom:44px">
+    <span class="badge b-r">Prepared for AMD</span>
+    <span class="badge b-o">Developer Hackathon ACT II · Track 3</span>
+    <span class="badge b-ro">🏆 ACT I — 1st Place AI Agents</span>
+    <span class="badge b-o">100% AMD · open-weight only</span>
+  </div>
+  <div class="h1">REPO<span class="r">MIND</span> v3</div>
+  <div class="divr" style="width:96px"></div>
+  <div class="lead" style="max-width:1520px;font-size:31px;line-height:1.32">
+    <strong style="color:var(--ink)">Free local, minimal burst.</strong> The on-prem cost + trust layer that makes AMD the <strong style="color:var(--r)">cheaper enterprise choice</strong> — and pulls Instinct + EPYC into the segment NVIDIA can't reach. Open-weight, air-gapped, 100% AMD.
+  </div>
+  <div class="flex g20" style="margin-top:52px">
+    <div class="card card-r" style="min-width:220px"><div class="kpi">−89%</div><div class="klbl">tokens · measured</div></div>
+    <div class="card card-k" style="min-width:220px"><div class="kpi k">−90%</div><div class="klbl">cached input · AMD-served<sup>13</sup></div></div>
+    <div class="card card-r" style="min-width:220px"><div class="kpi">$4.12</div><div class="klbl">ACT I · 256K repo · MI300X</div></div>
+    <div class="card card-k" style="min-width:220px"><div class="kpi k">$1T</div><div class="klbl">AMD AI-accel. TAM by 2030<sup>14</sup></div></div>
+  </div>
+  <div class="foot">Sardor Razikov · Solo builder, Tashkent, Uzbekistan · github.com/SRKRZ23/repomind-v3 (public shortly)</div>
+  <div class="sn">01 / 05</div>
+</div>
+
+<!-- ══ 2 · YOUR THESIS, SHIPPED ══ -->
+<div class="slide">
+  <div class="eye">The Pattern You Called at Kickoff — Shipped &amp; Measured</div>
+  <div class="h2">Small local model → delegates to Fireworks.<br>Enterprise <span class="r">cost-down</span>, on AMD.</div>
+  <div class="divr"></div>
+  <div class="lead" style="font-size:19px;margin-bottom:18px;max-width:1700px">You framed the north-star at kickoff: <strong style="color:var(--ink)">a small local model that delegates to Fireworks for the heavy pipeline — free local compute, minimal paid burst.</strong> REPOMIND is that pattern, built and measured.</div>
+  <div class="flex g24" style="flex:1;align-items:stretch">
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-r" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag">Measured cost layer · MacBook + AMD-hosted Fireworks</div>
+        <div class="prow"><span>AST skeleton — code exploration</span><span class="pv">−89%</span></div>
+        <div class="prow"><span>Cached input — repeated repo prefix<sup>13</sup></span><span class="pv">−90%</span></div>
+        <div class="prow"><span>Confidence cascade — skips the deep call</span><span class="pv">skip</span></div>
+        <div class="prow"><span>Industry routing, no quality loss<sup>12</sup></span><span class="pv">40–85%</span></div>
+        <div class="body" style="margin-top:10px;font-size:16px">The app <strong style="color:var(--ink)">streams the $ saved per query</strong> on screen — real, not projected.</div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-k" style="border-color:var(--r);flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag">The differentiator · free on-prem</div>
+        <div class="body">Open-weight runs on the enterprise's <strong style="color:var(--ink)">own AMD GPU → $0 per-token</strong>, data never leaves — ACT I proof: full <strong style="color:var(--ink)">256K repo for $4.12</strong> of MI300X time. The paid Fireworks burst is then cut <strong style="color:var(--ink)">−89/−90%.</strong><br><br>Free local + minimal remote = the enterprise TCO argument where <strong style="color:var(--r)">AMD wins.</strong></div></div>
+      <div class="card card-k"><div class="tag" style="color:var(--ink)">Local tier · in progress</div>
+        <div class="body" style="font-size:16px">Gemma as the local router on the 48GB Radeon (wiring as GPU frees up) → the strongest Gemma-on-AMD story. Deep tier = open-weight on Fireworks (AMD Instinct).</div></div>
+    </div>
+  </div>
+  <div class="sn">02 / 05</div>
+</div>
+
+<!-- ══ 3 · TWO MARKETS → ALL AMD ══ -->
+<div class="slide">
+  <div class="eye">Two Markets, One Engine — Both Pull Through AMD</div>
+  <div class="h2">Barred from cloud AI — or <span class="r">bleeding</span> on it.</div>
+  <div class="divr"></div>
+  <div class="flex g24" style="flex:1;align-items:stretch">
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column">
+      <div class="h3">Path A · <span class="r">Locked out</span> — $0 AI today</div>
+      <div class="tag" style="color:var(--g2);margin:8px 0 8px">On-prem is the only legal option</div>
+      <div class="prow"><span><b>Samsung</b> — banned ChatGPT after code leak<sup>1</sup></span><span class="pv">2023</span></div>
+      <div class="prow"><span><b>JP Morgan</b> — restricted ChatGPT firm-wide<sup>2</sup></span><span class="pv">2023</span></div>
+      <div class="prow"><span><b>Apple</b> — blocked ChatGPT + <b>Copilot</b><sup>3</sup></span><span class="pv">2023</span></div>
+      <div class="prow"><span><b>US Space Force</b> — banned genAI / CUI<sup>4</sup></span><span class="pv">2023</span></div>
+      <div class="prow"><span><b>EU AI Act</b> — non-compliance penalty<sup>6</sup></span><span class="pv">≤€35M/7%</span></div>
+      <div class="body" style="margin-top:auto;padding-top:12px;font-size:16.5px"><strong style="color:var(--ink)">→ On-prem open-weight on their own AMD Instinct + EPYC.</strong></div>
+    </div>
+    <div class="card card-r" style="flex:1;display:flex;flex-direction:column">
+      <div class="h3">Path B · <span class="r">Token tax</span> — bleeding on cost</div>
+      <div class="tag" style="margin:8px 0 8px">"The subsidy era ended"</div>
+      <div class="prow"><span><b>Uber</b> — 2026 AI-coding budget gone in 4 mo<sup>7</sup></span><span class="pv">$1,500 cap</span></div>
+      <div class="prow"><span><b>GitHub Copilot</b> — usage billing $29→$750<sup>8</sup></span><span class="pv">~25×</span></div>
+      <div class="prow"><span><b>Cursor</b> — $2B ARR, neg. margin, built router<sup>9</sup></span><span class="pv">$2B ARR</span></div>
+      <div class="prow"><span><b>Model-API spend</b> — doubled YoY<sup>10</sup></span><span class="pv">$8.4B/yr</span></div>
+      <div class="prow"><span><b>Enterprises</b> — &gt;$250K/yr on LLM APIs<sup>10</sup></span><span class="pv">37%</span></div>
+      <div class="prow"><span><b>Microsoft</b> — cut internal Claude Code licenses over cost<sup>18</sup></span><span class="pv">Jun 2026</span></div>
+      <div class="body" style="margin-top:auto;padding-top:12px;font-size:16.5px"><strong style="color:var(--ink)">→ The router cuts 40–70% &amp; migrates the cheap majority to AMD open-weight.</strong></div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:18px"><strong>Every path pulls through AMD:</strong> on-prem = Instinct/EPYC; the router turns existing cloud-AI spenders into AMD-inference customers.</div>
+  <div class="sn">03 / 05</div>
+</div>
+
+<!-- ══ 4 · THE AMD STRATEGIC CASE ══ -->
+<div class="slide">
+  <div class="eye">Why This Matters to AMD</div>
+  <div class="h2">The $1T-TAM workload for the segment<br>NVIDIA's CUDA moat <span class="r">can't defend.</span></div>
+  <div class="divr"></div>
+  <div class="flex g24" style="flex:1;align-items:stretch">
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-r"><div class="tag">AMD's own tailwind</div>
+        <div class="body">Lisa Su sizes the AI-accelerator TAM at <strong style="color:var(--ink)">$1 trillion by 2030</strong> (up from $500B by 2028)<sup>14</sup>; Data Center <strong style="color:var(--ink)">$5.8B, +57% YoY</strong> (Q1 FY2026)<sup>15</sup>, with <strong style="color:var(--ink)">agentic AI</strong> named as the driver. <strong style="color:var(--r)">REPOMIND is that agentic workload.</strong><div style="margin-top:12px;border-left:4px solid var(--r);padding:2px 0 2px 14px;font-size:15px;font-style:italic;color:var(--ink)">"Software is tokens plus time, and speed is the moat." — Anush Elangovan, VP AI Software, AMD<sup>19</sup></div></div></div>
+      <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">Pull-through — from a $0 baseline</div>
+        <div class="body">Each on-prem deployment ≈ <strong style="color:var(--ink)">$200–500K</strong> Instinct <strong style="color:var(--ink)">+ EPYC</strong>. REPOMIND is an <strong style="color:var(--ink)">AI agent</strong> (scheduling + tool-invocation) — the exact workload AMD says <strong style="color:var(--ink)">drives CPU demand</strong><sup>17</sup>: EPYC just hit a record <strong style="color:var(--r)">46.2% server-CPU revenue share</strong>, server-CPU TAM → <strong style="color:var(--ink)">$120–170B by 2030</strong>, Lisa Su sees a 1:1 CPU:GPU ratio. This segment deploys <strong style="color:var(--ink)">zero</strong> AI today, NVIDIA <strong style="color:var(--ink)">legally locked out</strong> → adoption from a <strong style="color:var(--r)">$0 baseline.</strong> All on AMD's open stack (ROCm 7 + vLLM).</div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-k"><div class="tag" style="color:var(--ink)">Gemma-on-AMD — the reference Google lacks<sup>16</sup></div>
+        <div class="body" style="font-size:16.5px">Google positions Gemma 4 for <em>"agentic workflows, coding assistants, regulated workloads on AMD ROCm"</em> — but has <strong style="color:var(--ink)">no named regulated on-prem production reference.</strong> REPOMIND is it.</div></div>
+      <div class="card card-k full" style="display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">The market it routes — nested, sourced</div>
+        <div class="prow" style="font-size:15.5px"><span>Model-API spend now (measured)<sup>10</sup></span><span class="pv">$8.4B/yr</span></div>
+        <div class="prow" style="font-size:15.5px"><span>Enterprise-LLM market by 2034<sup>11</sup></span><span class="pv">$71B</span></div>
+        <div class="prow" style="font-size:15.5px"><span>Serviceable — both paths</span><span class="pv">$0.4–4B</span></div>
+        <div class="prow" style="font-size:15.5px"><span>Routing cut, no quality loss<sup>12</sup></span><span class="pv">40–85%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tiny" style="margin-top:10px">Per-company & market $ are modeled on the measured floor + cited public data, ranged, not booked. Fireworks is AMD-Instinct-powered (partner). Named companies are not customers.</div>
+  <div class="sn">04 / 05</div>
+</div>
+
+<!-- ══ 5 · WHERE I'M AIMING + PROOF + SOURCES ══ -->
+<div class="slide">
+  <div class="eye">Where I'm Aiming · A Founder Who Ships</div>
+  <div class="h2">The cost + trust layer for<br>on-prem enterprise AI on <span class="r">AMD.</span></div>
+  <div class="divr"></div>
+  <div class="card card-r" style="padding:16px 24px;margin-bottom:16px"><div class="body" style="font-size:16.5px"><strong style="color:var(--ink)">🏆 Proof, already shipped:</strong> AMD ACT I — 1st Place AI Agents + Outstanding Social Engagement (two trophies · 481 submissions · 10,770 builders) · verified on real MI300X <strong style="color:var(--ink)">$4.12 / 256K / single card</strong> · <strong style="color:var(--ink)">AMD Developer officially featured REPOMIND</strong> · 3 Zenodo preprints. &nbsp;<span style="color:var(--r);font-weight:700">lablab.ai:</span> <em>"one of the standout submissions — the business case is airtight."</em></div></div>
+  <div class="flex g16" style="flex:1;align-items:stretch">
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">Tier 1 · Core <span style="color:var(--r)">SHIPPED</span></div>
+      <div class="body" style="font-size:15px">On-prem agent · local→Fireworks cost routing · Ed25519 AI Flight Recorder · CUDA→ROCm · air-gap · 38 tests + CI.</div></div>
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">Tier 2 · Trust <span style="color:var(--g2)">NEAR-TERM</span></div>
+      <div class="body" style="font-size:15px">Cost/Savings FinOps · self-verifying answers · PII gateway · continuous red-team · sovereign RAG.</div></div>
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">Tier 3 · Sovereign <span style="color:var(--g2)">HORIZON</span></div>
+      <div class="body" style="font-size:15px">Sovereign AI-in-a-box · verifiable unlearning · AI-decision insurance · trusted AI metering.</div></div>
+    <div class="card card-r" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag">Honesty is the moat</div>
+      <div class="body" style="font-size:15px">Every number measured or labeled modeled. In a field of demos that die after the video, this one has a <strong style="color:var(--ink)">real user and a real business case.</strong></div></div>
+  </div>
+  <div class="card card-k" style="margin-top:14px;padding:11px 20px"><div class="src"><b>Sources —</b> <b>1</b> Forbes '23 (Samsung) · <b>2</b> CNN '23 (JPM) · <b>3</b> TechCrunch '23 (Apple/Copilot) · <b>4</b> Air&amp;Space Forces '23 (Space Force/CUI) · <b>6</b> artificialintelligenceact.eu (Art. 99) · <b>7</b> TechCrunch '26 (Uber cap) · <b>8</b> GitHub Blog/TechCrunch '26 (Copilot $29→$750) · <b>9</b> TechCrunch/Reuters '26 (Cursor) · <b>10</b> Menlo Ventures '25 ($3.5B→$8.4B API spend; 37%&gt;$250K) · <b>11</b> Global Market Insights ($8.8B→$71.1B) · <b>12</b> Orq/TrueFoundry/IBM '26 (routing 40–85%) · <b>13</b> Anthropic/OpenAI/Google docs (cache −90%) · <b>14</b> CNBC — Lisa Su, AMD Financial Analyst Day Nov '25 ($1T by 2030) · <b>15</b> CNBC/DataCenterDynamics (AMD Q1 FY26 DC $5.8B, +57%) · <b>16</b> blog.google — Gemma 4 · <b>17</b> AMD blog "Agentic AI Changes the CPU/GPU Equation"; Mercury Research / BofA — EPYC record 46.2% server-CPU revenue share, server-CPU TAM →$120–170B by 2030, Lisa Su 1:1 CPU:GPU · <b>18</b> thenextweb / cryptobriefing '26 — Microsoft pulls internal Claude Code over cost · <b>19</b> Dev Interrupted / migovi '26 — Anush Elangovan (AMD VP AI Software): "software is tokens plus time, speed is the moat" · ROCm Everywhere · MI350P PCIe enterprise on-prem.</div></div>
+  <div class="foot">github.com/SRKRZ23/repomind-v3 (public shortly) · MIT · Sardor Razikov · razikovsardor1@gmail.com</div>
+  <div class="sn">05 / 05</div>
+</div>
+
+</body></html>

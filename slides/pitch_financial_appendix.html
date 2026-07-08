@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>REPOMIND v3 — Financial Appendix</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#0A0A0A}
+:root{--r:#CC0000;--ink:#0A0A0A;--g1:#3a3a3a;--g2:#6a6a6a;--g3:#9a9a9a;--line:#e6e6e6;--rf:#fbeaea}
+.slide{width:1920px;height:1080px;position:relative;background:#fff;padding:64px 84px;display:flex;flex-direction:column;overflow:hidden}
+.slide::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:var(--r)}
+.eye{font-size:13px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:var(--r);margin-bottom:10px}
+.h2{font-size:52px;font-weight:900;letter-spacing:-2px;line-height:1.0;color:var(--ink)}
+.divr{width:56px;height:5px;background:var(--r);border-radius:3px;margin:16px 0 20px}
+.body{font-size:17px;line-height:1.55;color:var(--g1)}
+.sm{font-size:13px;color:var(--g2);line-height:1.5}
+.tiny{font-size:11.5px;color:var(--g3);line-height:1.5}
+.r{color:var(--r)}.k{color:var(--ink)}
+.mstrip{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden;margin-bottom:22px}
+.mi{flex:1;padding:16px 14px;border-right:2px solid var(--line);text-align:center}
+.mi:last-child{border-right:none}
+.mn{font-size:32px;font-weight:900;letter-spacing:-1px;color:var(--ink)}.mn.r{color:var(--r)}
+.ml{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--g2);margin-top:5px}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--g2);text-align:left;padding:12px 16px;border-bottom:2px solid var(--ink)}
+td{font-size:16px;color:var(--g1);padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+td b{color:var(--ink)}
+tr:last-child td{border-bottom:none}
+.tot td{border-top:2px solid var(--ink);font-weight:800}
+.badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.5px;padding:2px 8px;border-radius:3px}
+.bm{background:var(--rf);color:var(--r);border:1px solid var(--r)}
+.be{background:#f0f0f0;color:var(--g2);border:1px solid var(--g3)}
+.card{border:2px solid var(--line);border-radius:10px;padding:22px 26px}
+.card-r{border-color:var(--r);background:var(--rf)}
+.card-k{border-color:var(--ink)}
+.tag{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--r);margin-bottom:8px}
+.sn{position:absolute;bottom:30px;right:84px;font-size:14px;font-weight:800;color:var(--g3);letter-spacing:2px}
+.note{font-size:12px;color:var(--g2);line-height:1.55;margin-top:14px}
+@media print{@page{size:1920px 1080px;margin:0}.slide{page-break-after:always}.slide:last-child{page-break-after:auto}}
+</style></head><body>
+
+<!-- ══ FIN-A · MEASURED FLOOR → PER-ENTERPRISE ECONOMICS ══ -->
+<div class="slide">
+  <div class="eye">Financial Appendix · The Measured Floor → Per-Enterprise $</div>
+  <div class="h2">50,000 engineers. $0 AI today.<br>One legal path — on <span class="r">AMD.</span></div>
+  <div class="divr"></div>
+  <div class="body" style="font-size:18px;margin-bottom:16px;max-width:1700px">Regulated enterprises are <b class="k">legally barred</b> from cloud AI coding — their engineers have <b class="k">nothing</b>. On-prem, open-weight on AMD is the only path. <b class="k">The conservative hammer:</b> one 5,000-dev bank recovers <b class="r">$11–22M/yr</b> in coding productivity — <b class="k">even at 1% capture that's $1.5M, still 8× the $180K license, payback in days.</b> The math needn't be exact — it's directionally undeniable.</div>
+  <div class="mstrip">
+    <div class="mi"><div class="mn r">$4.12</div><div class="ml">256K repo · 1 MI300X <span class="badge bm">measured</span></div></div>
+    <div class="mi"><div class="mn">31</div><div class="ml">devs/GPU clean · 8K–64K <span class="badge bm">measured</span></div></div>
+    <div class="mi"><div class="mn r">6.49×</div><div class="ml">throughput 8K vs 32K <span class="badge bm">measured</span></div></div>
+    <div class="mi"><div class="mn">−89/−90%</div><div class="ml">skeleton / cached input <span class="badge bm">measured</span></div></div>
+    <div class="mi"><div class="mn r">$0</div><div class="ml">per-token on-prem (open-weight)</div></div>
+  </div>
+  <table style="flex:1">
+    <thead><tr><th style="width:22%">Regulated enterprise</th><th style="width:12%">Developers</th><th style="width:20%">On-prem AMD GPUs¹</th><th style="width:23%">GPU-efficiency saving/yr²</th><th>+ On-prem inference</th></tr></thead>
+    <tbody>
+      <tr><td><b>JP Morgan</b> · banking</td><td>50,000</td><td><b>~77</b> MI300X <span class="sm">(vs 500 naïve)</span></td><td><b class="r">~$7.6M/yr</b></td><td rowspan="5" style="vertical-align:middle;font-size:15px">Open-weight runs on the bank's <b>own AMD GPU</b> → <b class="k">$0 per-token</b>, data never leaves. The paid Fireworks burst is cut <b class="k">−89/−90%</b> by the cost layer.<br><br><span class="sm">vs SaaS they can't legally use: Copilot/Cursor ≈ $19–39/seat/mo = $1.1–2.3M/yr forever, and banned.</span></td></tr>
+      <tr><td><b>Meta</b> · 30K devs</td><td>30,000</td><td><b>~48</b> MI300X <span class="sm">(vs 311)</span></td><td><b class="r">~$4.6M/yr</b></td></tr>
+      <tr><td><b>Apple</b> · iOS eng</td><td>10,000</td><td><b>~16</b> MI300X <span class="sm">(vs 104)</span></td><td><b class="r">~$1.5M/yr</b></td></tr>
+      <tr><td><b>Lockheed</b> · cleared</td><td>20,000</td><td><b>~32</b> MI300X <span class="sm">(vs 210)</span></td><td><b class="r">~$3.1M/yr</b></td></tr>
+      <tr><td><b>Netflix</b> · senior ML</td><td>3,000</td><td><b>~7</b> MI300X <span class="sm">(vs 42)</span></td><td><b class="r">~$0.6M/yr</b></td></tr>
+      <tr class="tot"><td>Illustrative 5-account slice</td><td>113,000</td><td>~180 MI300X</td><td class="r">~$17.4M/yr <span class="badge be">modeled</span></td><td>+ ~$0 marginal inference on-prem</td></tr>
+    </tbody>
+  </table>
+  <div class="note">Efficiency (<b>measured</b> 6.49×) makes on-prem AMD viable for a segment that otherwise deploys <b>zero</b> — so this is AMD adoption <b>from a $0 baseline, not fewer sales</b>. GPU counts modeled on the 6.49× + ~31 devs/GPU at realistic peak concurrency; efficiency saving vs a naïve 32K deployment @ ~$1.99/GPU-hr. Productivity recovery (task-level speedup) is <b>separate and larger</b> (see hammer above). <span class="badge bm">measured</span> = ACT I on real MI300X + live bench · <span class="badge be">modeled</span> = public prices. Illustrative of the compliance-locked segment, not customers.</div>
+  <div class="sn">FIN · A</div>
+</div>
+
+<!-- ══ FIN-B · THE VALUE CHAIN — WHO EARNS ══ -->
+<div class="slide">
+  <div class="eye">Financial Appendix · The Value Chain — Everyone in the Room Earns</div>
+  <div class="h2">One deployment. <span class="r">The whole ecosystem profits.</span></div>
+  <div class="divr"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex:1">
+    <div class="card card-r"><div class="tag">AMD — Ramine Roane · Malini · Nag Lohith</div>
+      <div class="body"><b class="k">EARN.</b> Every on-prem deployment = <b class="k">$200K–$500K</b> Instinct + EPYC pull-through <span class="badge be">modeled</span>. 3.5-min PoC (measured) → <b class="k">5–10× more PoCs/week</b> → 1–3 extra wins/qtr = <b class="r">$5–30M/yr pipeline</b> per account team. REPOMIND proves the cost-down economics that make on-prem viable — AMD sales from a <b class="k">$0 baseline</b>, a segment NVIDIA is <b class="k">legally locked out of.</b></div></div>
+    <div class="card card-k"><div class="tag">Fireworks AI — sponsor · AMD-hosted</div>
+      <div class="body"><b class="k">EARN.</b> The paid burst tier <b class="k">is Fireworks.</b> Even minimized (−89/−90%), every enterprise customer streams tokens through Fireworks for the hard queries → <b class="k">recurring AMD-hosted API revenue.</b> Cheap-enough burst = more enterprises adopt = <b class="r">more total consumption</b>, not less.</div></div>
+    <div class="card card-k"><div class="tag">Google DeepMind / Gemma — Ian Ballantyne</div>
+      <div class="body"><b class="k">MINDSHARE.</b> Gemma is the open-weight router tier that runs on the customer's AMD GPU → a <b class="k">regulated on-prem production reference</b> Gemma marketing lacks. A live Gemma-on-AMD run unlocks the <b class="r">$2,000 "Best AMD-Hosted Gemma"</b> bonus.</div></div>
+    <div class="card card-k"><div class="tag">lablab.ai / NativelyAI — Pawel · Andrea · Adam</div>
+      <div class="body"><b class="k">SALES.</b> An honest, <b class="k">measured</b> Track-3 build = a case study that drives <b class="k">cohort registration + sponsor pipeline</b>, and validates the AMD × Natively × Fireworks stack they sell. ACT I winner → v3 = the ecosystem continuity story.</div></div>
+  </div>
+  <div class="card card-r" style="margin-top:20px;border-width:3px">
+    <div class="body" style="font-size:18px"><b class="k">The chain:</b> a regulated enterprise recovers <b class="r">$11–22M/yr</b> locked productivity + kills $100M–$1B IP-leak + ≤€35M EU-AI-Act risk → pays REPOMIND <b class="k">$180K/yr</b> → which <b class="k">requires AMD</b> ($200–500K) + <b class="k">feeds Fireworks</b> (burst) + <b class="k">references Gemma</b> + gives <b class="k">lablab/Natively</b> the case study. <b class="r">Every link is AMD-served, open-weight, cost-down</b> — exactly what Malini, Ramine and Nag are looking for.</div>
+  </div>
+  <div class="card card-k" style="margin-top:16px;padding:16px 24px"><div class="body" style="font-size:16px"><b class="k">REPOMIND the business:</b> MIT open-core → enterprise license <b class="k">$180K–$2M/yr</b>, high-margin (open-weight — no model-training cost, no per-token COGS on-prem). Serviceable segment ≈ <b class="r">2,000+ regulated enterprises × $180K–2M = $0.4–4B</b> <span class="badge be">modeled</span> bottoms-up (banks · defense · healthcare · IP-sensitive big-tech).</div></div>
+  <div class="note">All per-org $ figures are <span class="badge be">modeled</span> on the <span class="badge bm">measured</span> floor + public prices, ranged, never asserted as booked. Productivity = task-level speedup on the coding share of dev time. Gemma bonus conditional on a live Gemma-on-AMD run.</div>
+  <div class="sn">FIN · B</div>
+</div>
+
+</body></html>

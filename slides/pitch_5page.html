@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>REPOMIND v3 — 5-Page Pitch</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#0A0A0A}
+:root{--r:#CC0000;--ink:#0A0A0A;--g1:#3a3a3a;--g2:#6a6a6a;--g3:#9a9a9a;--line:#e6e6e6;--rf:#fbeaea}
+.slide{width:1920px;height:1080px;position:relative;background:#fff;padding:64px 84px;display:flex;flex-direction:column;overflow:hidden}
+.slide::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:var(--r)}
+.eye{font-size:14px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--r);margin-bottom:12px}
+.h1{font-size:118px;font-weight:900;letter-spacing:-5px;line-height:.92;color:var(--ink)}
+.h2{font-size:58px;font-weight:900;letter-spacing:-2.3px;line-height:1.0;color:var(--ink)}
+.h3{font-size:30px;font-weight:800;letter-spacing:-1px;color:var(--ink)}
+.r{color:var(--r)}
+.divr{width:64px;height:5px;background:var(--r);border-radius:3px;margin:18px 0 22px}
+.lead{font-size:24px;line-height:1.45;color:var(--g1);font-weight:500}
+.body{font-size:18px;line-height:1.55;color:var(--g1)}
+.sm{font-size:14px;color:var(--g2);line-height:1.5}
+.tiny{font-size:11.5px;color:var(--g3);line-height:1.5}
+.flex{display:flex}.g16{gap:16px}.g20{gap:20px}.g24{gap:24px}.g28{gap:28px}.g36{gap:36px}
+.full{flex:1}
+.badge{display:inline-flex;align-items:center;padding:8px 18px;border-radius:4px;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.b-r{background:var(--r);color:#fff}.b-o{background:#fff;color:var(--ink);border:2px solid var(--ink)}.b-ro{background:var(--rf);color:var(--r);border:2px solid var(--r)}
+.card{border:2px solid var(--line);border-radius:10px;padding:24px 28px;background:#fff}
+.card-r{border-color:var(--r);background:var(--rf)}.card-k{border-color:var(--ink)}
+.kpi{font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--r)}.kpi.k{color:var(--ink)}
+.klbl{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--g2);margin-top:8px}
+.tag{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--r);margin-bottom:8px}
+.sn{position:absolute;bottom:30px;right:84px;font-size:15px;font-weight:800;color:var(--g3);letter-spacing:2px}
+.foot{position:absolute;bottom:30px;left:84px;font-size:13px;color:var(--g2)}
+.quote{border-left:5px solid var(--r);padding:12px 22px;background:var(--rf);font-size:18px;color:var(--ink);font-weight:600;border-radius:0 6px 6px 0}
+sup{font-size:.58em;color:var(--r);font-weight:800;vertical-align:super;line-height:0}
+.prow{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:16.5px;color:var(--g1)}
+.prow:last-child{border-bottom:none}.prow b{color:var(--ink)}
+.pv{color:var(--r);font-weight:800;white-space:nowrap;text-align:right}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--g2);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{font-size:16px;color:var(--g1);padding:8px 10px;border-bottom:1px solid var(--line)}
+td b{color:var(--ink)} tr:last-child td{border-bottom:none}
+.mstrip{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.mi{flex:1;padding:14px 12px;border-right:2px solid var(--line);text-align:center}.mi:last-child{border-right:none}
+.mn{font-size:30px;font-weight:900;letter-spacing:-1px;color:var(--ink)}.mn.r{color:var(--r)}
+.ml{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--g2);margin-top:5px}
+.src{font-size:11px;color:var(--g3);line-height:1.5}.src b{color:var(--g2);font-weight:800}
+@media print{@page{size:1920px 1080px;margin:0}.slide{page-break-after:always}.slide:last-child{page-break-after:auto}}
+</style></head><body>
+
+<!-- ══════════ 1 · COVER ══════════ -->
+<div class="slide">
+  <div class="flex g16" style="flex-wrap:wrap;margin-bottom:48px">
+    <span class="badge b-r">AMD Developer Hackathon ACT II</span>
+    <span class="badge b-o">Track 3 · Unicorn</span>
+    <span class="badge b-ro">🏆 ACT I — 1st Place AI Agents</span>
+    <span class="badge b-o">100% AMD · Open-weight only</span>
+  </div>
+  <div class="h1">REPO<span class="r">MIND</span> v3</div>
+  <div class="divr" style="width:96px"></div>
+  <div class="lead" style="max-width:1500px;font-size:32px;line-height:1.35">
+    The on-prem AI coding agent <strong style="color:var(--ink)">+ LLM cost-router</strong>. For the engineers <strong style="color:var(--ink)">legally barred</strong> from cloud AI — and the enterprises <strong style="color:var(--r)">bleeding</strong> on it. One engine. <strong style="color:var(--ink)">100% on AMD.</strong>
+  </div>
+  <div class="flex g20" style="margin-top:54px">
+    <div class="card card-r" style="min-width:220px"><div class="kpi">−89%</div><div class="klbl">tokens · measured</div></div>
+    <div class="card card-k" style="min-width:220px"><div class="kpi k">−90%</div><div class="klbl">cached input · AMD-served</div></div>
+    <div class="card card-r" style="min-width:220px"><div class="kpi">$4.12</div><div class="klbl">ACT I · 256K repo · MI300X</div></div>
+    <div class="card card-k" style="min-width:220px"><div class="kpi k">$8.4B</div><div class="klbl">/yr LLM-API market it routes<sup>10</sup></div></div>
+  </div>
+  <div class="foot">Sardor Razikov · Solo builder, Tashkent, Uzbekistan · github.com/SRKRZ23/repomind-v3</div>
+  <div class="sn">01 / 05</div>
+</div>
+
+<!-- ══════════ 2 · THE PROBLEM — BOTH MARKETS, SOURCED ══════════ -->
+<div class="slide">
+  <div class="eye">The Problem · Two Markets, One Pain</div>
+  <div class="h2">Barred from cloud AI — or <span class="r">bleeding</span> on it.</div>
+  <div class="divr"></div>
+  <div class="flex g24" style="flex:1;align-items:stretch">
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column">
+      <div class="flex" style="justify-content:space-between;align-items:flex-end;margin-bottom:6px">
+        <div class="h3">Path A · <span class="r">Locked out</span></div><div class="kpi k" style="font-size:40px">$0 AI</div></div>
+      <div class="tag" style="color:var(--g2);margin-bottom:10px">Regulated enterprises legally can't use cloud AI coding</div>
+      <div class="prow"><span><b>Samsung</b> — banned ChatGPT after source-code leak<sup>1</sup></span><span class="pv">May 2023</span></div>
+      <div class="prow"><span><b>JP Morgan</b> — restricted ChatGPT firm-wide<sup>2</sup></span><span class="pv">Feb 2023</span></div>
+      <div class="prow"><span><b>Apple</b> — blocked ChatGPT <b>and GitHub Copilot</b><sup>3</sup></span><span class="pv">2023</span></div>
+      <div class="prow"><span><b>US Space Force</b> — banned generative AI / CUI<sup>4</sup></span><span class="pv">2023</span></div>
+      <div class="prow"><span><b>Healthcare</b> — PHI can't leave; avg HIPAA fine<sup>5</sup></span><span class="pv">~$1.2M</span></div>
+      <div class="prow"><span><b>EU AI Act</b> — non-compliance penalty<sup>6</sup></span><span class="pv">≤€35M / 7%</span></div>
+      <div class="body" style="margin-top:auto;padding-top:14px;font-size:17px"><strong style="color:var(--ink)">50,000+ regulated engineers with nothing.</strong> On-prem is the only class of tool they can deploy.</div>
+    </div>
+    <div class="card card-r" style="flex:1;display:flex;flex-direction:column">
+      <div class="flex" style="justify-content:space-between;align-items:flex-end;margin-bottom:6px">
+        <div class="h3">Path B · <span class="r">Token tax</span></div><div class="kpi" style="font-size:40px">10–50×</div></div>
+      <div class="tag" style="margin-bottom:10px">Everyone else is drowning in runaway AI cost</div>
+      <div class="prow"><span><b>Uber</b> — burned its 2026 AI-coding budget in <b>4 months</b>, capped $1,500/mo<sup>7</sup></span><span class="pv">4 mo</span></div>
+      <div class="prow"><span><b>GitHub Copilot</b> — usage billing: $29 → $750/mo per dev<sup>8</sup></span><span class="pv">~25×</span></div>
+      <div class="prow"><span><b>Cursor</b> — $2B ARR, <b>negative margin</b>, built own router<sup>9</sup></span><span class="pv">$2B ARR</span></div>
+      <div class="prow"><span><b>Enterprises</b> — spending &gt;$250K/yr on LLM APIs<sup>10</sup></span><span class="pv">37%</span></div>
+      <div class="prow"><span><b>Model-API spend</b> — doubled YoY, and climbing<sup>10</sup></span><span class="pv">$8.4B/yr</span></div>
+      <div class="prow"><span><b>Microsoft</b> — cut internal Claude Code licenses over cost<sup>18</sup> (Walmart·Amazon·Cisco capping too)</span><span class="pv">Jun 2026</span></div>
+      <div class="body" style="margin-top:auto;padding-top:14px;font-size:17px"><strong style="color:var(--ink)">"The subsidy era ended."</strong> Cost is now everyone's problem — the banned worst of all.</div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:20px"><strong>One engine covers both:</strong> on-prem for the barred, a cost-router for the bleeding — and both flow to AMD.</div>
+  <div class="sn">02 / 05</div>
+</div>
+
+<!-- ══════════ 3 · SOLUTION + 100% AMD + GEMMA ══════════ -->
+<div class="slide">
+  <div class="eye">The Solution · One Engine · 100% AMD</div>
+  <div class="h2">On-prem agent + cost-router.<br>Every call is <span class="r">AMD compute.</span></div>
+  <div class="divr"></div>
+  <div class="flex g24" style="flex:1;align-items:stretch">
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-k"><div class="tag" style="color:var(--ink)">What it is</div>
+        <div class="body">A <strong style="color:var(--ink)">SC-TIR agent</strong> (Plan→Call→Observe→Think→Answer) reasoning over your codebase <strong style="color:var(--ink)">on-prem, air-gapped</strong>. The same engine <strong style="color:var(--ink)">routes/proxies</strong> existing Claude/OpenAI/Gemini spend and cuts it.</div></div>
+      <div class="card card-r"><div class="tag">Measured cost layer · live on MacBook + AMD Fireworks</div>
+        <div class="body"><strong style="color:var(--r)">−89%</strong> AST skeleton · <strong style="color:var(--r)">−90%</strong> cached input<sup>13</sup> · <strong style="color:var(--ink)">cascade skips</strong> the deep model when the cheap tier is sure. Industry routing confirms <strong style="color:var(--ink)">40–85%</strong> cuts, ~74% of queries never need the frontier<sup>12</sup>. App streams <strong style="color:var(--ink)">$ saved per query.</strong></div></div>
+      <div class="card card-k"><div class="tag" style="color:var(--ink)">Trust — the AI Flight Recorder</div>
+        <div class="body"><strong style="color:var(--ink)">Ed25519-signed, hash-chained, replayable</strong> audit of every action — auditor-legible (EU AI Act Art. 12<sup>6</sup>). Compliance becomes automatic evidence.</div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-k" style="border-color:var(--r)"><div class="tag">100% AMD — no closed models</div>
+        <div class="body">Runs on <strong style="color:var(--ink)">Fireworks (AMD Instinct-powered)</strong> + <strong style="color:var(--ink)">Radeon → MI300X</strong> on-prem. <strong style="color:var(--r)">No OpenAI / Anthropic / Gemini.</strong> Every deployment is an <strong style="color:var(--ink)">AMD pull-through</strong> in the segment NVIDIA's CUDA moat can't defend.</div></div>
+      <div class="card card-r" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+        <div class="tag">Gemma is the open-weight tier — in Google's own words<sup>16</sup></div>
+        <div class="quote" style="background:none;border-left:4px solid var(--r);padding:6px 18px;font-size:17px;font-weight:600">"Purpose-built for <strong>agentic workflows</strong>… power your <strong>IDEs, coding assistants</strong>… highest <strong>compliance guarantees for regulated workloads</strong>… integrate with <strong>AMD GPUs via ROCm</strong>."</div>
+        <div class="body" style="margin-top:12px;font-size:16px">That is REPOMIND, shipped. Gemma markets regulated-on-prem-on-AMD but has <strong style="color:var(--ink)">no named production reference</strong> — we're it.</div>
+      </div>
+      <div class="card card-k"><div class="tag" style="color:var(--ink)">It actually runs</div>
+        <div class="body" style="font-size:16.5px"><strong style="color:var(--ink)">docker compose up</strong> · 38 passing tests + CI · <strong style="color:var(--ink)">make demo-offline</strong> (no GPU/keys) · CUDA→ROCm · path-sandboxed.</div></div>
+    </div>
+  </div>
+  <div class="sn">03 / 05</div>
+</div>
+
+<!-- ══════════ 4 · THE MONEY ══════════ -->
+<div class="slide">
+  <div class="eye">The Money · Measured Floor → Per-Company → Market</div>
+  <div class="h2">Millions saved per deployment.<br>An <span class="r">$8.4B</span> flow, funneled to AMD.</div>
+  <div class="divr"></div>
+  <div class="lead" style="font-size:18px;margin-bottom:16px;max-width:1720px">A 5,000-dev bank recovers <strong style="color:var(--r)">$11–22M/yr</strong> in locked coding productivity — <strong style="color:var(--ink)">even at 1% capture that's $1.5M, 8× the $180K license, payback in days.</strong> On-prem open-weight = <strong style="color:var(--ink)">$0 per-token</strong> vs banned Copilot/Cursor at $1.1–2.3M/yr forever.</div>
+  <div class="flex g24" style="flex:1">
+    <div style="flex:1.05;display:flex;flex-direction:column">
+      <div class="tag" style="margin-bottom:4px">Path A — on-prem savings (banned enterprises)</div>
+      <table>
+        <thead><tr><th style="width:30%">Enterprise</th><th style="width:15%">Devs</th><th style="width:28%">AMD GPUs</th><th>Save/yr<sup>a</sup></th></tr></thead>
+        <tbody>
+          <tr><td><b>JP Morgan</b></td><td>50,000</td><td><b>~77</b> MI300X</td><td><b class="r">~$7.6M</b></td></tr>
+          <tr><td><b>Meta</b></td><td>30,000</td><td><b>~48</b></td><td><b class="r">~$4.6M</b></td></tr>
+          <tr><td><b>Apple</b></td><td>10,000</td><td><b>~16</b></td><td><b class="r">~$1.5M</b></td></tr>
+          <tr><td><b>Lockheed</b></td><td>20,000</td><td><b>~32</b></td><td><b class="r">~$3.1M</b></td></tr>
+        </tbody>
+      </table>
+      <div class="tag" style="margin:14px 0 4px">Path B — router savings (bleeding enterprises)</div>
+      <table>
+        <thead><tr><th style="width:45%">Payer</th><th style="width:28%">Today</th><th>After −40–70%<sup>b</sup></th></tr></thead>
+        <tbody>
+          <tr><td><b>Uber</b> (~5,000 eng)</td><td>~$30M/yr</td><td><b class="r">save $12–21M</b></td></tr>
+          <tr><td><b>Copilot dev</b></td><td>$750/mo</td><td><b class="r">save $300–525</b></td></tr>
+          <tr><td><b>$1M/yr spender</b></td><td>$1M/yr</td><td><b class="r">save $400–850K</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+      <div class="card card-r"><div class="tag">Pricing · high-margin open-core</div>
+        <div class="body" style="font-size:16.5px"><strong style="color:var(--ink)">$500 · $2,500 · $15K / mo</strong> (starter → air-gapped) + AMD-cloud burst. MIT open-core → <strong style="color:var(--ink)">$180K–2M/yr</strong> enterprise. No per-token COGS on-prem.</div></div>
+      <div class="card card-k"><div class="tag" style="color:var(--ink)">Serviceable market — both paths</div>
+        <div class="body" style="font-size:16.5px"><strong>Path A:</strong> 2,000+ regulated × $180K–2M = <strong style="color:var(--ink)">$0.4–4B</strong>. <strong>Path B:</strong> &gt;$250K/yr cohort ≈ $3B flow → ~$1.5B savings pool → <strong style="color:var(--ink)">$225–300M</strong> capture ceiling.</div></div>
+      <div class="card card-k full" style="display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">The nested market stack — sourced</div>
+        <div class="prow" style="font-size:15px"><span>AMD AI-accelerator TAM by 2030<sup>14</sup></span><span class="pv">$1 TRILLION</span></div>
+        <div class="prow" style="font-size:15px"><span>Enterprise-LLM market by 2034<sup>11</sup></span><span class="pv">$71B</span></div>
+        <div class="prow" style="font-size:15px"><span>Model-API spend now (measured)<sup>10</sup></span><span class="pv">$8.4B/yr</span></div>
+        <div class="prow" style="font-size:15px"><span>Routing cut, no quality loss<sup>12</sup></span><span class="pv">40–85%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tiny" style="margin-top:10px"><sup>a</sup> Modeled on the <strong>measured</strong> 6.49× throughput + ~31 devs/GPU — AMD adoption from a <strong>$0 baseline, not fewer sales.</strong> <sup>b</sup> Modeled on measured levers + industry routing<sup>12</sup>; company $ ranged, not booked. Productivity recovery (hammer) is separate and larger.</div>
+  <div class="sn">04 / 05</div>
+</div>
+
+<!-- ══════════ 5 · WHO WINS + TRACTION + REFERENCES ══════════ -->
+<div class="slide">
+  <div class="eye">Everyone Earns · Especially AMD · A Founder Who Ships</div>
+  <div class="h2">One deployment. <span class="r">The whole ecosystem profits.</span></div>
+  <div class="divr"></div>
+  <div class="card card-r" style="padding:16px 24px;margin-bottom:16px"><div class="body" style="font-size:16.5px"><strong style="color:var(--ink)">🏆 Proof, already shipped:</strong> AMD ACT I — 1st Place AI Agents + Outstanding Social Engagement (two trophies · 481 submissions · 10,770 builders) · verified on real MI300X <strong style="color:var(--ink)">$4.12 / 256K / single card</strong> · <strong style="color:var(--ink)">AMD Developer officially featured REPOMIND</strong> · 3 Zenodo preprints. &nbsp;<span style="color:var(--r);font-weight:700">lablab.ai:</span> <em>"one of the standout submissions — the business case is airtight."</em></div></div>
+  <div class="flex g16" style="flex:1;align-items:stretch">
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">AMD — the platform</div>
+      <div class="body" style="font-size:16px"><strong style="color:var(--ink)">Q1 FY2026 Data Center $5.8B, +57% YoY</strong><sup>15</sup>; Lisa Su names <strong style="color:var(--ink)">agentic AI</strong> as the driver — REPOMIND is one. Every deployment = <strong style="color:var(--r)">$200–500K</strong> Instinct<strong style="color:var(--ink)">+EPYC</strong> pull-through. Agents drive <strong style="color:var(--ink)">CPU</strong> demand too — EPYC just hit a record <strong style="color:var(--ink)">46.2% server-CPU share</strong><sup>17</sup>. Feeds the <strong style="color:var(--ink)">$1T-by-2030</strong> accelerator TAM<sup>14</sup>.</div></div>
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">Fireworks AI</div>
+      <div class="body" style="font-size:16px">The paid burst tier <strong style="color:var(--ink)">is Fireworks</strong> (on AMD Instinct). Cheaper burst → more enterprises adopt → <strong style="color:var(--r)">more total AMD-hosted consumption</strong>, per customer, recurring. The router sends the cheap 60–80% here and on-prem.</div></div>
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag" style="color:var(--ink)">Gemma / DeepMind</div>
+      <div class="body" style="font-size:16px">A live <strong style="color:var(--ink)">regulated on-prem Gemma-on-AMD</strong> reference Google's marketing lacks<sup>16</sup> — the champion demo Ian Ballantyne already evangelizes ("Gemma offline for local coding"). Targets the <strong style="color:var(--ink)">Best-Use-of-Gemma</strong> bonus.</div></div>
+    <div class="card card-r" style="flex:1;display:flex;flex-direction:column;justify-content:center"><div class="tag">Enterprise</div>
+      <div class="body" style="font-size:16px"><strong style="color:var(--ink)">$11–22M/yr recovered</strong> (Path A) or <strong style="color:var(--ink)">40–70% bill cut</strong> (Path B) · $0 per-token on-prem · IP-leak + EU-AI-Act risk down. Payback in <strong style="color:var(--ink)">days</strong>.</div></div>
+  </div>
+  <div class="card card-k" style="margin-top:16px;padding:12px 20px">
+    <div class="src"><b>Sources —</b>
+      <b>1</b> Forbes '23 (Samsung) · <b>2</b> CNN '23 (JPM) · <b>3</b> TechCrunch '23 (Apple/Copilot) · <b>4</b> Air&amp;Space Forces '23 (Space Force/CUI) · <b>5</b> Brellium/HHS-OCR (HIPAA ~$1.2M) · <b>6</b> artificialintelligenceact.eu (Art. 99, ≤€35M/7%) · <b>7</b> TechCrunch '26 (Uber $1,500 cap) · <b>8</b> GitHub Blog / TechCrunch '26 (Copilot $29→$750) · <b>9</b> TechCrunch/Reuters '26 (Cursor $2B ARR, thin margin) · <b>10</b> Menlo Ventures '25 ($3.5B→$8.4B API spend; 37%&gt;$250K) · <b>11</b> Global Market Insights ($8.8B→$71.1B, 26% CAGR) · <b>12</b> Orq/TrueFoundry/IBM '26 (routing 40–85%) · <b>13</b> Anthropic/OpenAI/Google docs (cache −90%) · <b>14</b> CNBC — Lisa Su, AMD Financial Analyst Day Nov '25 ($1T by 2030) · <b>15</b> CNBC/DataCenterDynamics (AMD Q1 FY26 DC $5.8B, +57%) · <b>16</b> blog.google — Gemma 4 (agentic / coding / regulated / AMD ROCm) · <b>17</b> AMD "Agentic AI Changes the CPU/GPU Equation" / Mercury Research — EPYC record 46.2% server-CPU revenue share; server-CPU TAM →$120–170B by 2030 · <b>18</b> thenextweb / cryptobriefing '26 — Microsoft pulls internal Claude Code licenses over cost ($500–2,000/eng/mo).
+    </div>
+  </div>
+  <div class="sm" style="margin-top:10px;font-size:14px;text-align:center"><strong style="color:var(--ink)">Creativity · Product/Market · Completeness · Use of AMD</strong> — all four, 100% AMD, measured &amp; honest. <span style="color:var(--g2)">Company $ = modeled on cited public data, ranged, not booked; named companies are not customers.</span></div>
+  <div class="foot">github.com/SRKRZ23/repomind-v3 · MIT · Sardor Razikov · razikovsardor1@gmail.com</div>
+  <div class="sn">05 / 05</div>
+</div>
+
+</body></html>

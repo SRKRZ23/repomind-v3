@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>REPOMIND — The Pivot</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#0A0A0A}
+:root{--r:#CC0000;--ink:#0A0A0A;--g1:#3a3a3a;--g2:#6a6a6a;--g3:#9a9a9a;--line:#e6e6e6;--rf:#fbeaea}
+.slide{width:1920px;height:1080px;position:relative;background:#fff;padding:60px 84px;display:flex;flex-direction:column;overflow:hidden}
+.slide::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:var(--r)}
+.eye{font-size:13px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:var(--r);margin-bottom:10px}
+.h2{font-size:50px;font-weight:900;letter-spacing:-2px;line-height:1.0;color:var(--ink)}
+.divr{width:56px;height:5px;background:var(--r);border-radius:3px;margin:16px 0 22px}
+.body{font-size:17px;line-height:1.55;color:var(--g1)}
+.sm{font-size:13.5px;color:var(--g2);line-height:1.5}
+.tiny{font-size:11.5px;color:var(--g3);line-height:1.5}
+.r{color:var(--r)}.k{color:var(--ink)}
+.card{border:2px solid var(--line);border-radius:12px;padding:24px 26px}
+.card-r{border-color:var(--r);background:var(--rf)}
+.card-k{border-color:var(--ink)}
+.tag{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--r);margin-bottom:10px}
+.arrow{display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:900;color:var(--r);width:60px;flex:none}
+.h3{font-size:26px;font-weight:900;letter-spacing:-.5px;color:var(--ink);line-height:1.05}
+.big{font-size:40px;font-weight:900;letter-spacing:-1.5px;color:var(--ink)}.big.r{color:var(--r)}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--g2);text-align:left;padding:9px 14px;border-bottom:2px solid var(--ink)}
+td{font-size:15.5px;color:var(--g1);padding:9px 14px;border-bottom:1px solid var(--line)}
+td b{color:var(--ink)} tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.5px;padding:2px 8px;border-radius:3px}
+.bm{background:var(--rf);color:var(--r);border:1px solid var(--r)}
+.be{background:#f0f0f0;color:var(--g2);border:1px solid var(--g3)}
+.sn{position:absolute;bottom:28px;right:84px;font-size:14px;font-weight:800;color:var(--g3);letter-spacing:2px}
+.mstrip{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.mi{flex:1;padding:16px 14px;border-right:2px solid var(--line);text-align:center}
+.mi:last-child{border-right:none}
+.mn{font-size:30px;font-weight:900;letter-spacing:-1px;color:var(--ink)}.mn.r{color:var(--r)}
+.ml{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--g2);margin-top:5px}
+@media print{@page{size:1920px 1080px;margin:0}.slide{page-break-after:always}.slide:last-child{page-break-after:auto}}
+</style></head><body>
+
+<!-- ══ PIVOT · A — THE PROGRESSION ══ -->
+<div class="slide">
+  <div class="eye">The Pivot · Beachhead → Funnel</div>
+  <div class="h2">We built the cost engine for the banned.<br>The market <span class="r">handed us everyone.</span></div>
+  <div class="divr"></div>
+  <div class="flex" style="display:flex;align-items:stretch;gap:0;flex:1">
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column">
+      <div class="tag" style="color:var(--g2)">Case A · ACT I / v1 — the beachhead</div>
+      <div class="h3">On-prem, <span class="r">$0</span> per-token</div>
+      <div class="body" style="margin-top:12px;flex:1">For the <b class="k">~2,000 regulated enterprises legally barred</b> from cloud AI. Open-weight on the customer's <b class="k">own AMD GPU</b> — data never leaves.<br><br><b class="k">Measured:</b> full 256K repo for <b class="r">$4.12</b> of MI300X time · 31 devs/GPU · 6.49× throughput. <span class="badge bm">measured</span></div>
+      <div class="sm" style="margin-top:8px">Undeniable, but a niche. No rivals — they're locked out.</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="card card-r" style="flex:1.15;display:flex;flex-direction:column">
+      <div class="tag">The pivotal moment · 2026 — "the subsidy era ended"</div>
+      <div class="h3">Everyone's bill <span class="r">exploded.</span></div>
+      <div class="body" style="margin-top:12px;flex:1">
+        <b class="k">Uber</b> burned its <b class="r">entire 2026 AI-coding budget in 4 months</b> — on Claude Code + Cursor — capped devs at $1,500/mo.<br>
+        <b class="k">GitHub Copilot</b> went usage-based: <b class="r">$29 → $750/mo</b> per dev (~25×).<br>
+        <b class="k">Anthropic</b> began billing Enterprise <b class="k">full compute</b> — the flat sub was the subsidy.<br>
+        <b class="k">Cursor</b> ran <b class="k">negative margin</b> until it built its own router.</div>
+      <div class="sm" style="margin-top:8px">The cost pain stopped being a niche. Now it's <b class="k">everyone's</b> — the banned worst of all.</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="card card-k" style="flex:1;display:flex;flex-direction:column">
+      <div class="tag">Case B · v3 — the funnel</div>
+      <div class="h3">Same engine.<br><span class="r">The whole market.</span></div>
+      <div class="body" style="margin-top:12px;flex:1">The router+proxy that runs air-gapped now <b class="k">cuts any Claude/OpenAI/Gemini bill 40–70%</b> (measured levers) — then <b class="k">migrates the cheap 60–80% of traffic to AMD-hosted open-weight.</b><br><br>Beachhead → funnel → <b class="r">all flowing to AMD.</b></div>
+      <div class="sm" style="margin-top:8px">TAM: from 2,000 banned → the <b class="k">$8.4B</b> already-spending market.</div>
+    </div>
+  </div>
+  <div class="mstrip" style="margin-top:22px">
+    <div class="mi"><div class="mn r">$4.12</div><div class="ml">256K repo · MI300X <span class="badge bm">measured</span></div></div>
+    <div class="mi"><div class="mn">−89/−90%</div><div class="ml">skeleton / cached input <span class="badge bm">measured</span></div></div>
+    <div class="mi"><div class="mn r">40–85%</div><div class="ml">routing cut (industry <span class="badge be">sourced</span>)</div></div>
+    <div class="mi"><div class="mn">$8.4B→$71B</div><div class="ml">LLM-API market ’25→’34</div></div>
+    <div class="mi"><div class="mn r">→ AMD</div><div class="ml">every optimized customer</div></div>
+  </div>
+  <div class="sn">PIVOT · A</div>
+</div>
+
+<!-- ══ PIVOT · B — THE ALL-AI ECONOMICS ══ -->
+<div class="slide">
+  <div class="eye">Every Popular LLM · The Price We Arbitrage</div>
+  <div class="h2">15–60× between tiers. <span class="r">74% never needed the frontier.</span></div>
+  <div class="divr"></div>
+  <div style="display:flex;gap:26px;flex:1">
+    <div style="flex:1.05">
+      <div class="tag">Price surface · per 1M tokens · Jul 2026</div>
+      <table>
+        <thead><tr><th style="width:44%">Model</th><th>Input</th><th>Output</th><th>Cache</th></tr></thead>
+        <tbody>
+          <tr><td><b>Claude Opus 4.6</b></td><td>$5.00</td><td>$25.00</td><td>−90%</td></tr>
+          <tr><td><b>GPT-5.4</b></td><td>$2.50</td><td>$15.00</td><td>−90%</td></tr>
+          <tr><td><b>GPT-5.4 Pro</b></td><td>$30.00</td><td><b class="r">$180.00</b></td><td>−90%</td></tr>
+          <tr><td><b>Gemini 3.1 Pro</b></td><td>$2.00</td><td>$12.00</td><td>−90%</td></tr>
+          <tr><td><b>Claude Sonnet 5</b></td><td>$2–3</td><td>$10–15</td><td>−90%</td></tr>
+          <tr><td><b>Gemini 3 Flash</b></td><td>$0.50</td><td>$3.00</td><td>−90%</td></tr>
+          <tr><td><b>Open-weight · Fireworks (on AMD)</b></td><td>~$0.1–0.5</td><td>~$0.2–0.8</td><td>−80/90%</td></tr>
+          <tr><td><b>Open-weight · on-prem AMD</b></td><td><b class="r">≈ $0</b></td><td><b class="r">≈ $0</b></td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="tiny" style="margin-top:10px">Every query sent to a frontier model that a cheap tier could answer is pure waste. Prices fell ~80% in ’25→’26 — the arbitrage only widens.</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card card-r">
+        <div class="tag">Routing works — third-party validation</div>
+        <div class="body"><b class="r">40–85%</b> bill cut, no visible quality loss. A router keeps <b class="k">95% of GPT-5.2 quality using it for only 26% of requests</b> → <b class="k">74%</b> goes to cheap tiers. RouteLLM/FrugalGPT: 2×–98% at equal quality. <span class="sm">→ our modeled <b class="k">40–70%</b> is conservative.</span></div>
+      </div>
+      <div class="card card-k">
+        <div class="tag" style="color:var(--ink)">The pain, by name</div>
+        <table style="margin-top:-2px">
+          <tbody>
+            <tr><td><b>Uber</b></td><td class="r">whole yr budget · 4 mo</td></tr>
+            <tr><td><b>Copilot org</b></td><td class="r">$29 → $750/mo (25×)</td></tr>
+            <tr><td><b>Cursor</b></td><td class="r">neg. margin → built own router</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card card-r" style="border-width:3px">
+        <div class="body" style="font-size:17px"><b class="k">RepoMind's edge (not "we route" — everyone does):</b> coding-native <b class="k">AST compression</b> + <b class="k">Ed25519 Flight Recorder</b> audit + the <b class="k">AMD open-weight migration</b> path. Cut the bill today, move the cheap majority to AMD.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-k" style="margin-top:20px;padding:16px 24px"><div class="body" style="font-size:17px"><b class="k">Case B market:</b> $8.4B → $71B LLM-API spend; the >$250K/yr cohort ≈ <b class="k">$3B+/yr</b> optimizable → ~$1.5B savings pool → capture 15–25% = <b class="r">$225–300M ceiling</b> · 1% ≈ $2–3M · 5% ≈ $11–15M <span class="badge be">modeled</span>. And <b class="k">every optimized customer becomes an AMD-inference customer</b> — the funnel AMD doesn't have.</div></div>
+  <div class="sn">PIVOT · B</div>
+</div>
+
+<!-- ══ PIVOT · C — WHO WINS WHEN REPOMIND WINS ══ -->
+<div class="slide">
+  <div class="eye">Both Paths · Everyone in the Room Earns · Especially AMD</div>
+  <div class="h2">One engine covers both markets — <span class="r">and every link is AMD.</span></div>
+  <div class="divr"></div>
+  <div class="card card-r" style="padding:18px 26px;margin-bottom:20px">
+    <div class="body" style="font-size:18px"><b class="k">The AMD tailwind:</b> Lisa Su (Financial Analyst Day, Nov 2025) sizes the AI accelerator TAM at <b class="r">$1 TRILLION by 2030</b> (up from $500B/2028). AMD Q1 FY2026 Data Center = <b class="k">$5.8B, +57% YoY</b>; Su names <b class="k">agentic AI</b> as the demand driver. <b class="k">REPOMIND is an agentic-AI workload that converts that TAM into Instinct + EPYC pull-through</b> — in the one segment NVIDIA's CUDA moat can't defend.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1">
+    <div class="card card-k"><div class="tag" style="color:var(--ink)">AMD — Ramine Roane (CVP AI) · the platform</div>
+      <div class="body" style="font-size:15.5px"><b class="k">EARN.</b> His public mission = <b class="k">"make AI ubiquitous across all AMD platforms."</b> REPOMIND puts AMD AI where NVIDIA-cloud can't go — <b class="k">air-gapped enterprises on customer-owned Instinct/EPYC</b>, built on AMD's open stack (<b class="k">ROCm 7 + vLLM</b>). Every deployment = <b class="r">$200–500K</b> silicon [modeled]; every optimized cloud customer = an AMD-inference migration. Owned-hardware $0/token is where AMD's TCO argument is <b class="k">strongest</b> (sidesteps thin AMD-rental availability).</div></div>
+    <div class="card card-k"><div class="tag" style="color:var(--ink)">Gemma — Ian Ballantyne (DeepMind DevRel)</div>
+      <div class="body" style="font-size:15.5px"><b class="k">REFERENCE.</b> Gemma 4's own words: <i>"purpose-built for agentic workflows… power your IDEs, coding assistants… highest compliance guarantees for regulated workloads… integrate with AMD GPUs via ROCm."</i> That's REPOMIND verbatim. Gemma markets sovereignty but lists <b class="k">no named regulated on-prem production reference</b> — REPOMIND is it. Ian personally demos <b class="k">Gemma offline for local coding</b> ("Sovereign Escape Velocity"). A live Gemma-on-AMD run targets the <b class="k">Best-Use-of-Gemma bonus</b>.</div></div>
+    <div class="card card-k"><div class="tag" style="color:var(--ink)">lablab · NativelyAI — Pawel · Andrea</div>
+      <div class="body" style="font-size:15.5px"><b class="k">ECOSYSTEM.</b> lablab = #1 AI-builder ecosystem (<b class="k">240K+ devs</b>). REPOMIND validates the exact stack they sell — <b class="k">AMD compute × Fireworks API × open-weight Gemma</b> — and gives them the <b class="k">ACT I winner → v3 continuity</b> case study that drives cohort + sponsor pipeline. Honest, measured, cited = the story they amplify.</div></div>
+    <div class="card card-r"><div class="tag">The enterprise — BOTH paths</div>
+      <div class="body" style="font-size:15.5px"><b class="k">PATH A (banned):</b> Samsung (code-leak ban '23), JPMorgan, Apple (banned Copilot), Space Force, HIPAA health — recover locked productivity, $0 egress, EU-AI-Act €35M/7% risk down. <b class="k">PATH B (bleeding):</b> Uber (budget gone in 4mo, $1,500 cap), Copilot ($29→$750). Cut the bill <b class="r">40–70%</b>, migrate to AMD. <span class="sm" style="font-size:13px">All company $ = modeled on cited public facts, ranged.</span></div></div>
+  </div>
+  <div class="card card-k" style="margin-top:18px;padding:15px 24px"><div class="body" style="font-size:16px"><b class="k">The chain:</b> enterprise recovers/saves millions → pays REPOMIND → which <b class="k">requires AMD</b> (Instinct+EPYC) + <b class="k">runs Fireworks</b> (on AMD Instinct) + <b class="k">references Gemma</b> (regulated on-prem) + gives <b class="k">lablab</b> the case study. <b class="r">Both markets, one engine, all flowing to AMD.</b> <span class="sm" style="font-size:12.5px">Sources: AMD IR/CNBC · Google Gemma-4 blog · Menlo Ventures · Forbes/CNN/TechCrunch. Judge roles per public posts; Gemma-bonus amount to be confirmed on the event page.</span></div></div>
+  <div class="sn">PIVOT · C</div>
+</div>
+
+</body></html>

@@ -1,0 +1,14 @@
+# Never bake secrets or local cruft into any image
+.env
+.env.local
+.env.*
+*.key
+.git
+.gitignore
+**/__pycache__
+**/*.pyc
+.pytest_cache
+**/node_modules
+frontend/dist
+slides
+*.pdf

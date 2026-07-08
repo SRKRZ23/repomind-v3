@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>REPOMIND v3 — Financial Appendix</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;background:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
+:root{--bg:#0A0A0A;--bg2:#111;--border:#252525;--w:#fff;--w2:#ccc;--w3:#888;--w4:#555;--r:#CC0000;--r3:rgba(204,0,0,.10);--r4:rgba(204,0,0,.22)}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#0A0A0A;padding:64px 96px;display:flex;flex-direction:column}
+.slide::after{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:var(--r)}
+.eye{font-size:12px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--r);margin-bottom:10px}
+.h2{font-size:56px;font-weight:800;line-height:1.0;color:var(--w);letter-spacing:-2px;margin-bottom:8px}
+.divr{width:48px;height:3px;background:var(--r);border-radius:2px;margin:14px 0 22px}
+.mstrip{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:24px}
+.mitem{flex:1;padding:20px 18px;border-right:1px solid var(--border);text-align:center}
+.mitem:last-child{border-right:none}
+.mnum{font-size:38px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--w)}
+.mnum.r{color:var(--r)}
+.mlbl{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--w4);margin-top:6px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--w4);padding:11px 16px;border-bottom:1px solid var(--border);text-align:left}
+.tbl td{padding:12px 16px;font-size:15px;color:var(--w2);border-bottom:1px solid #161616;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.r{color:var(--r)}.w{color:var(--w)}.grn{color:#5cb85c}
+.big{font-size:19px;font-weight:800;color:var(--w)}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:3px}
+.bm{background:rgba(80,200,80,.10);color:#5cb85c;border:1px solid rgba(80,200,80,.25)}
+.be{background:rgba(255,255,255,.06);color:var(--w3);border:1px solid #333}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:20px 26px}
+.cardr{border-color:var(--r4);background:var(--r3)}
+.sn{position:absolute;bottom:22px;right:48px;font-size:11px;color:var(--w4);letter-spacing:1.5px;font-weight:600}
+.note{font-size:12px;color:var(--w4);line-height:1.6;margin-top:14px}
+@media print{@page{size:1920px 1080px;margin:0}.slide{page-break-after:always}}
+</style></head><body>
+
+<!-- SLIDE A: MEASURED FLOOR + AMD TCO -->
+<div class="slide">
+  <div class="eye">Financial Appendix · The Measured Floor</div>
+  <div class="h2">$4.12 of benchmark → a defensible<br>AMD hardware business case.</div>
+  <div class="divr"></div>
+  <div class="mstrip">
+    <div class="mitem"><div class="mnum r">$4.12</div><div class="mlbl">Benchmark · 124 min · 62 pts</div></div>
+    <div class="mitem"><div class="mnum">256K</div><div class="mlbl">Context · 1 MI300X (verified)</div></div>
+    <div class="mitem"><div class="mnum">31/31</div><div class="mlbl">Devs/GPU clean · 8K–64K</div></div>
+    <div class="mitem"><div class="mnum r">6.49×</div><div class="mlbl">Throughput 8K vs 32K</div></div>
+    <div class="mitem"><div class="mnum">3.5 min</div><div class="mlbl">Deploy vs 2–5 days (H100)</div></div>
+  </div>
+  <div style="display:flex;gap:28px;flex:1">
+    <div class="card" style="flex:1.1">
+      <div class="eye" style="margin-bottom:12px">AMD MI300X vs NVIDIA H100 — TCO</div>
+      <table class="tbl">
+        <tr><th>Lever</th><th>MI300X</th><th>H100</th></tr>
+        <tr><td>Unit price <span class="badge be">est</span></td><td class="big grn">$10–15K</td><td>$32–40K+</td></tr>
+        <tr><td>HBM per card</td><td class="big grn">192 GB</td><td>80 GB</td></tr>
+        <tr><td>$ / GB VRAM (cloud)</td><td class="big grn">~55% cheaper</td><td>baseline</td></tr>
+        <tr><td>256K single-card <span class="badge bm">measured</span></td><td class="grn">fits (77+94 GiB)</td><td>needs 2–4× sharding</td></tr>
+        <tr><td>Dev seats / GPU <span class="badge be">modeled</span></td><td class="big">14.5 cont · 70–140 burst</td><td>—</td></tr>
+      </table>
+    </div>
+    <div class="card cardr" style="flex:1">
+      <div class="eye" style="margin-bottom:12px">The AMD flywheel (why it sells hardware)</div>
+      <div style="font-size:16px;color:var(--w2);line-height:1.9">
+        <span class="w">▸ PoC velocity:</span> 3.5 min vs 2–5 days → AMD runs <span class="w">5–10× more PoCs/week</span> → ~1–3 extra wins/qtr = <span class="r">$5–30M/yr pipeline</span> per account team <span class="badge be">modeled</span><br><br>
+        <span class="w">▸ CUDA→ROCm agent</span> lowers the #1 Instinct blocker (switching cost).<br><br>
+        <span class="w">▸ AITER regression</span> filed for AMD ROCm = ecosystem "co-developer" signal.<br><br>
+        <span class="w">▸ Every deployment</span> = MI300X + EPYC pull-through.
+      </div>
+    </div>
+  </div>
+  <div class="note">Verified on real MI300X (AMD Dev Cloud, $1.99/GPU-hr, vLLM 0.17.1 + ROCm 7.2). AMD's own Feb-2026 blog: "serve full 256K context on a single GPU" — REPOMIND is the first open-source proof. <span class="badge bm">measured</span> = empirical · <span class="badge be">modeled</span> = estimate on public prices.</div>
+  <div class="sn">FIN · A</div>
+</div>
+
+<!-- SLIDE B: PER-STAKEHOLDER $ -->
+<div class="slide">
+  <div class="eye">Financial Appendix · Per-Stakeholder Business Case</div>
+  <div class="h2">Every company in this room — on AMD.</div>
+  <div class="divr"></div>
+  <table class="tbl" style="flex:1">
+    <tr><th style="width:20%">Company · judge</th><th style="width:13%">Vector</th><th>The defensible $ (modeled on the measured floor)</th></tr>
+    <tr><td><span class="w big">AMD</span> · Nick Ni</td><td class="grn">EARN</td><td>PoC 3.5 min → <span class="w">1–3 extra wins/qtr = $5–30M/yr pipeline</span>/team; ~$80–120K MI300X+EPYC per converted 8-GPU node</td></tr>
+    <tr><td><span class="w big">Oracle / OCI</span> · Karsin, Haris</td><td class="grn">EARN</td><td>MI300X @ $6/GPU-hr sovereign: air-gapped bank ≈ <span class="w">$420K/yr/node → $4–8M/yr @10 customers</span></td></tr>
+    <tr><td><span class="w big">Ameren</span> · Bhanu 🏴</td><td class="grn">SAVE</td><td>NERC-CIP <span class="r">$1.54M/day/violation</span> → auto signed audit evidence; inference must be on-prem MI300X+EPYC</td></tr>
+    <tr><td><span class="w big">Netflix</span> · Rajat Shah</td><td class="grn">SAVE</td><td>Memory-bound: 16×H100 → <span class="w">~7×MI300X</span>; double-digit-% off a ~$5M/yr slice (conditional on the port)</td></tr>
+    <tr><td><span class="w big">Meta</span> · Sriharsha</td><td class="grn">SAVE</td><td>Second-source on ~600K H100-equiv = <span class="w">nine-figure leverage</span>; 8K density cuts 30K-dev deploy 311→48 GPU</td></tr>
+    <tr><td><span class="w big">Apple</span> · Suneeth</td><td class="w3">UNLOCK</td><td>~10K restricted engineers at $0 AI → unlock <span class="w3">(on Apple Silicon, not AMD — honest)</span></td></tr>
+    <tr><td><span class="w big">AWS / Amazon</span> · ×4</td><td class="w3">EPYC</td><td>EPYC-only (no Instinct on AWS); appliance for the air-gapped segment Amazon Q can't reach; breakeven vs Cursor 3–6 mo</td></tr>
+    <tr><td><span class="w big">Google</span> · Ian (Gemma)</td><td class="grn">MINDSHARE</td><td>Gemma load-bearing triage, air-gapped/audited = the regulated production reference + $2K prize</td></tr>
+    <tr><td><span class="w big">lablab.ai</span> · Pawel, Andrea</td><td class="grn">SALES</td><td>Their words: <span class="w">"one of the standout submissions… $30B market SaaS can't touch"</span> → cohort + sponsor pipeline</td></tr>
+  </table>
+  <div class="note"><span class="badge bm">measured floor</span> ($4.12 · 256K on 1 MI300X · 31/31 · 6.49×) makes every <span class="badge be">modeled</span> $ figure credible. Honest: TAM led at conservative $5–10B ($1–2B recoverable/enterprise, task-level speedup) — the "$30B" is lablab's public words, quoted. No % -of-salary math.</div>
+  <div class="sn">FIN · B</div>
+</div>
+
+</body></html>

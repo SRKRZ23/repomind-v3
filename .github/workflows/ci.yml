@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install backend deps
+        run: pip install -r backend/requirements.txt
+      - name: Run test suite
+        run: cd backend && python -m pytest -q
+      - name: Verify CUDA→ROCm patch is git-apply-clean
+        run: |
+          cd backend && python -c "import tools,subprocess,tempfile,os; \
+          src='#include <cuda_runtime.h>\nvoid f(){float*d;cudaMalloc(&d,16);cudaFree(d);}\n'; \
+          d=tempfile.mkdtemp(); open(d+'/original.cu','w').write(src); \
+          subprocess.run(['git','init','-q'],cwd=d,check=True); \
+          subprocess.run(['git','add','original.cu'],cwd=d,check=True); \
+          open(d+'/m.patch','w').write(tools.split_patch(tools.migrate_cuda_to_rocm(src))); \
+          r=subprocess.run(['git','apply','--check','m.patch'],cwd=d); \
+          exit(r.returncode)"
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build frontend
+        run: cd frontend && npm ci && npm run build

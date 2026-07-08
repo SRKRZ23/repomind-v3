@@ -1,0 +1,28 @@
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Node / Frontend
+node_modules/
+dist/
+.vite/
+
+# Docker
+*.log
+
+# macOS
+.DS_Store
+
+# Cached repos (runtime)
+/tmp/repos/
+
+# IDE
+.vscode/
+.idea/

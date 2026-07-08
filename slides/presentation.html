@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>REPOMIND v3 — AMD ACT II</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif}
+.deck{width:1920px;height:1080px;transform-origin:top left;position:relative}
+.slide{width:1920px;height:1080px;position:absolute;top:0;left:0;display:none;overflow:hidden;background:#0A0A0A}
+.slide.active{display:flex}
+:root{
+  --bg:#0A0A0A;--bg2:#111111;--bg3:#191919;
+  --border:#252525;--border2:#333333;
+  --w:#FFFFFF;--w2:#CCCCCC;--w3:#888888;--w4:#555555;
+  --r:#CC0000;--r2:#FF1111;--r3:rgba(204,0,0,.10);--r4:rgba(204,0,0,.22);
+}
+.nav-btn{position:fixed;top:50%;transform:translateY(-50%);z-index:999;background:rgba(255,255,255,.04);border:1px solid #2a2a2a;color:#555;font-size:18px;width:40px;height:64px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;transition:.15s}
+.nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+#prev{left:10px}#next{right:10px}
+.dots{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:999}
+.dot{width:6px;height:6px;border-radius:50%;background:#2a2a2a;cursor:pointer;transition:.15s}
+.dot.on{background:var(--r);width:22px;border-radius:3px}
+.sn{position:absolute;bottom:22px;right:48px;font-size:11px;color:var(--w4);letter-spacing:1.5px;font-weight:600}
+.red-bar::after{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:var(--r)}
+
+/* TYPE */
+.eye{font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--r);margin-bottom:12px}
+.h1{font-size:88px;font-weight:800;line-height:1.0;color:var(--w);letter-spacing:-3px}
+.h2{font-size:60px;font-weight:800;line-height:1.0;color:var(--w);letter-spacing:-2px}
+.h3{font-size:36px;font-weight:700;color:var(--w);letter-spacing:-1px}
+.body{font-size:18px;line-height:1.65;color:var(--w2)}
+.body-lg{font-size:22px;line-height:1.6;color:var(--w2)}
+.sm{font-size:13px;color:var(--w3);line-height:1.5}
+.r{color:var(--r)}.w{color:var(--w)}
+.mono{font-family:'SF Mono','Fira Code',Menlo,monospace;font-size:.92em}
+
+/* LAYOUT */
+.pad{padding:64px 96px}
+.flex{display:flex}.col{flex-direction:column}
+.center{align-items:center;justify-content:center}
+.g12{gap:12px}.g16{gap:16px}.g20{gap:20px}.g24{gap:24px}
+.g32{gap:32px}.g40{gap:40px}.g48{gap:48px}
+.full{flex:1}
+
+/* CARD */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:28px 32px}
+.card-r{border-color:var(--r4);background:var(--r3)}
+.card-dim{background:#0D0D0D;border-color:#1E1E1E}
+
+/* DIVIDER */
+.div-r{width:48px;height:3px;background:var(--r);border-radius:2px;margin:16px 0 20px}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--w4);padding:10px 18px;border-bottom:1px solid var(--border)}
+.tbl td{padding:13px 18px;font-size:14px;color:var(--w2);border-bottom:1px solid #161616;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#111}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;padding:4px 12px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.b-r{background:rgba(204,0,0,.12);color:var(--r);border:1px solid rgba(204,0,0,.28)}
+.b-w{background:rgba(255,255,255,.06);color:var(--w2);border:1px solid #333}
+.b-g{background:rgba(80,200,80,.08);color:#5cb85c;border:1px solid rgba(80,200,80,.2)}
+.b-y{background:rgba(200,160,0,.1);color:#c8a000;border:1px solid rgba(200,160,0,.25)}
+
+/* METRIC STRIP */
+.mstrip{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.mitem{flex:1;padding:22px 24px;border-right:1px solid var(--border);text-align:center}
+.mitem:last-child{border-right:none}
+.mnum{font-size:44px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--w)}
+.mnum.r{color:var(--r)}
+.mlbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--w4);margin-top:5px}
+
+/* CODE */
+.code{background:#0D0D0D;border:1px solid #1E1E1E;border-radius:6px;padding:24px 32px;font-family:'SF Mono','Fira Code',Menlo,monospace;font-size:14px;color:#888;line-height:1.85}
+.c-r{color:#FF4444}.c-g{color:#4CAF50}.c-t{color:#26A69A}.c-cm{color:#3a3a3a}.c-w{color:#ccc}
+
+/* QUOTE */
+.quote{border-left:3px solid var(--r);padding:16px 22px;background:#111;border-radius:0 4px 4px 0}
+
+/* COL HIGHLIGHT */
+.col-hl{background:rgba(204,0,0,.06);border-left:2px solid rgba(204,0,0,.3);border-right:2px solid rgba(204,0,0,.3)}
+.col-hl-h{background:rgba(204,0,0,.14)!important;color:var(--r)!important;font-weight:800!important;letter-spacing:2px!important;font-size:10px!important}
+
+/* PERSON */
+.person{display:flex;align-items:flex-start;gap:18px;padding:16px 0;border-bottom:1px solid #1a1a1a}
+.person:last-child{border-bottom:none}
+.p-av{width:42px;height:42px;border-radius:50%;background:var(--r3);border:1px solid var(--r4);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:var(--r);flex-shrink:0}
+.p-name{font-size:14px;font-weight:700;color:var(--w)}
+.p-role{font-size:11px;color:var(--w4);margin-top:2px}
+.p-txt{font-size:13px;color:var(--w2);margin-top:7px;line-height:1.55}
+
+/* PRINT */
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;background:#0A0A0A}
+  .deck{transform:none!important;position:relative!important;left:0!important;top:0!important;width:1920px;height:auto}
+  .slide{display:block!important;position:relative;page-break-after:always;break-after:page;width:1920px;height:1080px;overflow:hidden}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .nav-btn,.dots{display:none!important}
+  @page{size:1920px 1080px;margin:0}
+}
+</style>
+</head>
+<body>
+<button class="nav-btn" id="prev" onclick="go(-1)">&#8592;</button>
+<button class="nav-btn" id="next" onclick="go(1)">&#8594;</button>
+<div class="dots" id="dots"></div>
+<div class="deck" id="deck">
+
+<!-- ══ S01 COVER ══
+TRIGGER: Pattern interrupt — lead with what makes hardware unique, not product features.
+Fixed: removed contradictory "0 bytes" claim from cover metrics.
+-->
+<div class="slide red-bar">
+  <div class="flex col center" style="width:100%;height:100%;padding:0 120px">
+    <div style="max-width:900px">
+      <div class="flex g12" style="margin-bottom:40px;flex-wrap:wrap">
+        <span class="badge b-r">AMD Developer Hackathon ACT II</span>
+        <span class="badge b-g">🏆 ACT I — 1st Place AI Agents</span>
+        <span class="badge b-w">Track 3 Unicorn</span>
+        <span class="badge b-w">Gemma 27B · Fireworks AI</span>
+        <span class="badge b-w">AMD Radeon → MI300X</span>
+      </div>
+      <div class="h1" style="font-size:104px;margin-bottom:18px">REPO<span class="r">MIND</span><br>v3</div>
+      <div class="div-r"></div>
+      <div class="body-lg" style="max-width:840px;margin-bottom:48px">
+        The on-premises coding agent for the engineers who <strong style="color:var(--w)">can't touch cloud AI</strong> —
+        a real coding model + 256K context on a <strong style="color:var(--w)">single AMD GPU</strong>, air-gapped,
+        at a cost that <strong style="color:var(--r)">pencils out for the enterprise.</strong>
+      </div>
+      <div class="flex g20">
+        <div class="card card-r" style="padding:20px 28px;min-width:170px;text-align:center">
+          <div style="font-size:44px;font-weight:900;color:var(--r)">192GB</div>
+          <div class="sm" style="margin-top:4px">AMD MI300X HBM3</div>
+        </div>
+        <div class="card" style="padding:20px 28px;min-width:170px;text-align:center">
+          <div style="font-size:44px;font-weight:900;color:var(--w)">256K</div>
+          <div class="sm" style="margin-top:4px">token context (vLLM)</div>
+        </div>
+        <div class="card" style="padding:20px 28px;min-width:170px;text-align:center">
+          <div style="font-size:44px;font-weight:900;color:var(--w)">$4.12</div>
+          <div class="sm" style="margin-top:4px">ACT I verified benchmark</div>
+        </div>
+        <div class="card" style="padding:20px 28px;min-width:170px;text-align:center">
+          <div style="font-size:44px;font-weight:900;color:var(--w)">39</div>
+          <div class="sm" style="margin-top:4px">CUDA→HIP rules + kernel launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:36px;left:120px;font-size:13px;color:var(--w4)">Sardor Razikov · Solo researcher, Tashkent, Uzbekistan · CVPR 2026 Workshop Co-Author · 3 Zenodo preprints</div>
+  <div class="sn">01 / 16</div>
+</div>
+
+<!-- ══ S02 THE PROBLEM ══
+Fixed: Goldman framing changed from "received €35M fine" to "€35M exposure."
+Fixed: removed made-up fine as headline fact for named company.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">The Problem — Right Now</div>
+    <div class="h2" style="margin-bottom:10px">Every tool that makes developers<br>productive just got <span class="r">banned.</span></div>
+    <div class="div-r"></div>
+    <div class="flex g28" style="flex:1;align-items:stretch;margin-top:6px;gap:28px">
+      <div class="card card-r" style="flex:1">
+        <div class="eye" style="margin-bottom:14px">JP MORGAN CHASE</div>
+        <div style="font-size:52px;font-weight:900;color:var(--r);line-height:1;letter-spacing:-2px">50,000</div>
+        <div style="font-size:12px;color:var(--w4);margin-bottom:18px;margin-top:4px">DEVELOPERS · RESTRICTED CLOUD AI CODING TOOLS¹</div>
+        <div class="body" style="font-size:15px">~50,000 developers, restricted from cloud AI coding. McKinsey's ~37% is a task-level coding speedup — applied to the coding share of dev time, recoverable value is on the order of <strong style="color:var(--w)">$1–2B/yr</strong>, not 37% of payroll.</div>
+        <div style="margin-top:14px;font-size:28px;font-weight:900;color:var(--w)">≈ <span class="r">$1–2B/yr</span> recoverable¹</div>
+      </div>
+      <div class="card card-r" style="flex:1">
+        <div class="eye" style="margin-bottom:14px">APPLE INC.</div>
+        <div style="font-size:52px;font-weight:900;color:var(--r);line-height:1;letter-spacing:-2px">30,000+</div>
+        <div style="font-size:12px;color:var(--w4);margin-bottom:18px;margin-top:4px">ENGINEERS · RESTRICTED EXTERNAL AI CODING¹</div>
+        <div class="body" style="font-size:15px">GitHub Copilot and Google Gemini blocked. IP exfiltration risk: one leak event = $100M–$1B liability exposure. All AI coding tools blocked company-wide.</div>
+        <div style="margin-top:14px;font-size:24px;font-weight:900;color:var(--w)">IP leak surface: <span class="r">unbounded</span></div>
+        <div style="font-size:10px;color:var(--w4);margin-top:4px">illustrative¹</div>
+      </div>
+      <div class="card card-r" style="flex:1">
+        <div class="eye" style="margin-bottom:14px">GOLDMAN SACHS + EU ENTERPRISES</div>
+        <div style="font-size:52px;font-weight:900;color:var(--r);line-height:1;letter-spacing:-2px">€35M</div>
+        <div style="font-size:12px;color:var(--w4);margin-bottom:18px;margin-top:4px">EU AI ACT · TIERED PENALTIES² · PHASING IN 2026</div>
+        <div class="body" style="font-size:15px">Goldman leadership has spoken publicly about immature AI governance frameworks.¹ EU AI Act obligations phase in through 2026 — up to €35M for the most serious violations.</div>
+        <div style="margin-top:14px;font-size:24px;font-weight:900;color:var(--w)">Clock is <span class="r">ticking</span></div>
+      </div>
+    </div>
+    <div style="margin-top:20px" class="quote">
+      <span style="font-size:14px;color:var(--w2)">Illustrative of a real segment: large regulated employers that restricted cloud AI coding. <strong style="color:var(--w)">REPOMIND is built for this gap</strong> — these companies are not represented as customers.</span>
+    </div>
+    <div style="margin-top:8px;font-size:10px;color:var(--w4)">¹ Per public reporting (press coverage / public executive statements). Figures are illustrative estimates, not company-confirmed.</div>
+  </div>
+  <div class="sn">02 / 16</div>
+</div>
+
+<!-- ══ S03 JUDGE WIIFM ══
+Fixed: Suneeth reframed — not "you ARE the customer" but "maps to your challenge."
+Fixed: Pawel's CVPR claim corrected to honest framing.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Built for Every Perspective in This Room</div>
+    <div class="h2" style="margin-bottom:8px">Each judge. Each lens.<br>Each <span class="r">specific angle.</span></div>
+    <div class="div-r"></div>
+    <div class="flex g32" style="flex:1;margin-top:4px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div class="person">
+          <div class="p-av">N</div>
+          <div>
+            <div class="p-name">Nick Ni · AMD VP Developer Ecosystem</div>
+            <div class="p-role">Hardware platform, ROCm adoption, developer ecosystem</div>
+            <div class="p-txt"><span class="r">Your angle:</span> The CUDA→ROCm migration agent directly attacks NVIDIA's ecosystem lock-in — AMD's #1 adoption barrier. 50M+ lines of CUDA on GitHub, waiting for exactly this tool. Every migration = AMD MI300X adoption. The hardware slide is built around YOUR hardware math.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="p-av">I</div>
+          <div>
+            <div class="p-name">Ian Ballantyne · Google DeepMind</div>
+            <div class="p-role">AI developer ecosystem, Gemma integration</div>
+            <div class="p-txt"><span class="r">Relevant angle:</span> Gemma 27B is load-bearing, not a cheap tier: on deep queries it triages the file manifest, selects the relevant subset, and hands the MI300X a focused context — a measured token reduction surfaced live. Gemma does the context-engineering the big model would otherwise waste 256K compute on (smart-routing mode; off under air-gap).</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="p-av">S</div>
+          <div>
+            <div class="p-name">Suneeth Maraboina · Apple Technology Leader</div>
+            <div class="p-role">Enterprise engineering, large-scale systems</div>
+            <div class="p-txt"><span class="r">Relevant angle:</span> Slide 2 maps to the constraint large regulated engineering orgs face — restricted external AI coding tools. REPOMIND's enforced air-gap mode (AIR_GAP=1, egress hard-refused) and path-sandboxed tools are designed for the on-prem posture such infosec reviews require. Not a substitute for a full security review — a credible starting architecture.</div>
+          </div>
+        </div>
+      </div>
+      <div style="width:1px;background:var(--border);flex-shrink:0"></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div class="person">
+          <div class="p-av">P</div>
+          <div>
+            <div class="p-name">Pawel Czech · lablab.ai — ACT I Judge</div>
+            <div class="p-role">Hackathon evaluation, continuity narrative</div>
+            <div class="p-txt"><span class="r">Your angle:</span> ACT I 1st Place was your call. AMD published an official testimonial. v3 adds Docker (required), Gemma routing (+$2K prize), CUDA→ROCm, and multi-repo support — every ACT II evaluation criterion, addressed. The trajectory from v1 to v3 is visible and verified.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="p-av">R</div>
+          <div>
+            <div class="p-name">Rajat Gupta · Netflix ML Platform</div>
+            <div class="p-role">Large-scale ML infrastructure, CUDA codebases</div>
+            <div class="p-txt"><span class="r">Your angle:</span> Netflix operates CUDA-heavy ML pipelines. REPOMIND's agent can analyze any codebase and generate ROCm migration patches — enabling Netflix to evaluate AMD hardware as an alternative to NVIDIA at the infrastructure level, with automated migration instead of manual porting.</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="p-av">A</div>
+          <div>
+            <div class="p-name">Andrei Kozlov · ENDGAME Ventures</div>
+            <div class="p-role">Investment thesis, market, moat</div>
+            <div class="p-txt"><span class="r">Relevant angle:</span> An underserved on-prem segment with a regulatory tailwind (EU AI Act phasing in through 2026, tiered penalties²). Incumbents exist but none are AMD-native. The wedge is first-mover, not a permanent moat. Pricing on slide 14: $500–$15K/month tiers + usage.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">03 / 16</div>
+</div>
+
+<!-- ══ S04 PAIN MATRIX ══
+Fixed: Goldman from "€35M FINE" to "€35M Exposure" — factual.
+Fixed: numbers consistent with S02.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Enterprise Pain Point Matrix</div>
+    <div class="h3" style="margin-bottom:6px">Four dimensions of pain. One solution vector.</div>
+    <div class="div-r" style="margin-bottom:18px"></div>
+    <table class="tbl" style="flex:1">
+      <thead>
+        <tr>
+          <th style="width:18%;text-align:left">Company</th>
+          <th style="width:20%">Banned Tools</th>
+          <th style="width:13%">Scale</th>
+          <th style="width:22%">Compliance Trigger</th>
+          <th style="width:13%">Annual Risk</th>
+          <th style="width:14%">REPOMIND v3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div style="font-size:16px;font-weight:700;color:var(--w)">JP Morgan Chase</div><div class="sm">NYSE: JPM · Financial Services</div></td>
+          <td><span class="badge b-r">Cursor</span>&nbsp;<span class="badge b-r">All cloud AI</span></td>
+          <td style="font-size:22px;font-weight:800;color:var(--r)">50,000<div style="font-size:11px;color:var(--w4)">developers</div></td>
+          <td style="font-size:12px;color:var(--w3)">MAS TRM · Basel III · SOX · SEC Rule 17a-4</td>
+          <td style="font-size:20px;font-weight:800;color:var(--r)">~$1–2B<div style="font-size:11px;color:var(--w4)">recoverable/yr¹</div></td>
+          <td><span class="badge b-g">✓ On-prem Docker</span></td>
+        </tr>
+        <tr>
+          <td><div style="font-size:16px;font-weight:700;color:var(--w)">Apple Inc.</div><div class="sm">NASDAQ: AAPL · Consumer Electronics</div></td>
+          <td><span class="badge b-r">Copilot</span>&nbsp;<span class="badge b-r">Gemini</span></td>
+          <td style="font-size:22px;font-weight:800;color:var(--r)">30,000+<div style="font-size:11px;color:var(--w4)">engineers</div></td>
+          <td style="font-size:12px;color:var(--w3)">Trade secrets · IP licensing risk · Secrecy NDA policy</td>
+          <td style="font-size:20px;font-weight:800;color:var(--r)">$1B+<div style="font-size:11px;color:var(--w4)">per IP incident</div></td>
+          <td><span class="badge b-g">✓ Zero egress*</span></td>
+        </tr>
+        <tr>
+          <td><div style="font-size:16px;font-weight:700;color:var(--w)">Goldman Sachs</div><div class="sm">NYSE: GS · Investment Banking</div></td>
+          <td><span class="badge b-r">All external AI</span></td>
+          <td style="font-size:22px;font-weight:800;color:var(--r)">40,000<div style="font-size:11px;color:var(--w4)">employees</div></td>
+          <td style="font-size:12px;color:var(--w3)">SEC · CFTC · FINRA · Public statements on immature AI governance¹</td>
+          <td style="font-size:20px;font-weight:800;color:var(--r)">≤€35M<div style="font-size:11px;color:var(--w4)">top-tier max²</div></td>
+          <td><span class="badge b-g">✓ Heuristic pre-scan</span></td>
+        </tr>
+        <tr>
+          <td><div style="font-size:16px;font-weight:700;color:var(--w)">EU Enterprises</div><div class="sm">GDPR jurisdiction · Aug 2026 enforcement</div></td>
+          <td><span class="badge b-y">US-hosted AI</span></td>
+          <td style="font-size:22px;font-weight:800;color:var(--r)">Millions<div style="font-size:11px;color:var(--w4)">affected devs</div></td>
+          <td style="font-size:12px;color:var(--w3)">EU AI Act Art. 12 · GDPR data residency · tiered penalties²</td>
+          <td style="font-size:20px;font-weight:800;color:var(--r)">tiered²<div style="font-size:11px;color:var(--w4)">€7.5M–€35M</div></td>
+          <td><span class="badge b-g">✓ On-premises</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="flex g24" style="margin-top:20px">
+      <div class="quote" style="flex:2">
+        <span style="font-size:13px;color:var(--w3)"><strong style="color:var(--w)">The real market:</strong> enterprises that restricted cloud AI coding and need on-prem. Incumbents exist (Tabnine, Cody Enterprise) — <strong style="color:var(--r)">none combine air-gap + MI300X 256K + CUDA→ROCm.</strong></span>
+      </div>
+      <div style="flex:1;font-size:11px;color:var(--w4);padding:14px 0;line-height:1.7">* Air-gap mode: <span class="mono">AIR_GAP=1</span> — Fireworks egress hard-refused at the client; all queries on-prem MI300X.<br>² EU AI Act penalties are tiered: ≤€7.5M/1% (Art.12-type record-keeping) up to €35M/7% (Art.5 prohibited practices). Not a per-coding-tool fine.</div>
+    </div>
+  </div>
+  <div class="sn">04 / 16</div>
+</div>
+
+<!-- ══ S05 COMPETITIVE VOID ══ -->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Competitive Landscape</div>
+    <div class="h3" style="margin-bottom:6px">No competitor combines the full on-prem stack.</div>
+    <div class="div-r" style="margin-bottom:8px"></div>
+    <div style="font-size:11px;color:var(--w4);margin-bottom:12px">Grid compares the widely-used cloud-native tools. On-prem incumbents (Tabnine, Sourcegraph Cody Enterprise) are real and self-hostable — addressed in the cards below; none pair on-prem with AMD MI300X + CUDA→ROCm.</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:24%;text-align:left">Capability</th>
+          <th style="width:15%">GitHub Copilot</th>
+          <th style="width:15%">Cursor</th>
+          <th style="width:15%">Continue.dev</th>
+          <th style="width:16%" class="col-hl-h">REPOMIND v3</th>
+          <th style="width:15%">Codeium Ent.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>100% on-premises deploy</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#555;text-align:center;font-size:13px">Partial</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#555;text-align:center;font-size:13px">Partial</td></tr>
+        <tr><td>256K token context (vLLM on AMD)</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#333;text-align:center;font-size:16px">✗</td></tr>
+        <tr><td>AMD MI300X 192GB HBM3 support</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#333;text-align:center;font-size:16px">✗</td></tr>
+        <tr><td>Automated CUDA → ROCm migration</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#333;text-align:center;font-size:16px">✗</td></tr>
+        <tr><td>OWASP-LLM heuristic pre-scan (5 surfaces)</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#555;text-align:center;font-size:13px">Partial</td></tr>
+        <tr><td>EU AI Act Art. 12 record-keeping indicator</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#333;text-align:center;font-size:16px">✗</td></tr>
+        <tr><td>docker compose up in 3 commands</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#555;text-align:center;font-size:13px">Partial</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#333;text-align:center;font-size:16px">✗</td></tr>
+        <tr><td>Gemma 27B cost-routing layer</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td style="color:#333;text-align:center;font-size:16px">✗</td><td class="col-hl" style="text-align:center;color:#5cb85c;font-size:16px">✓</td><td style="color:#333;text-align:center;font-size:16px">✗</td></tr>
+      </tbody>
+    </table>
+    <div class="flex g20" style="margin-top:20px">
+      <div class="card card-r" style="flex:1;padding:18px 24px">
+        <div class="eye" style="margin-bottom:8px">The Real Insight</div>
+        <div class="body" style="font-size:14px">We don't compete with Copilot. We serve the orgs <strong style="color:var(--w)">that already restricted it</strong> — and self-host incumbents (Tabnine, Cody Enterprise) don't do AMD-native CUDA→ROCm.</div>
+      </div>
+      <div class="card" style="flex:1;padding:18px 24px">
+        <div class="eye" style="margin-bottom:8px">Honest Landscape</div>
+        <div class="body" style="font-size:14px">On-prem coding AI exists (Tabnine, Cody Enterprise, Continue.dev). <strong style="color:var(--w)">None combine air-gap + MI300X 256K + CUDA→ROCm + a compliance pre-scan.</strong></div>
+      </div>
+      <div class="card card-r" style="flex:1;padding:18px 24px">
+        <div class="eye" style="margin-bottom:8px">The Wedge</div>
+        <div class="body" style="font-size:14px">The AMD MI300X + enforced air-gap combination is the differentiator. Not a permanent moat — a first-mover wedge into an underserved, forcing-function-driven segment.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">05 / 16</div>
+</div>
+
+<!-- ══ S06 SOLUTION ══
+Fixed: "0 bytes leave infra" replaced with honest "MI300X-only mode = zero egress" with footnote.
+Fixed: Fireworks as optional, not default for all queries.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">The Solution</div>
+    <div class="h2" style="margin-bottom:8px">Three commands.<br><span class="r">Enterprise-grade AI.</span></div>
+    <div class="div-r"></div>
+    <div class="flex g36" style="flex:1;margin-top:8px;gap:36px">
+      <div style="flex:1.1">
+        <div class="code" style="margin-bottom:20px">
+<span class="c-cm"># Step 1 — Clone</span><br>
+git clone github.com/SRKRZ23/repomind-v3<br>
+cd repomind-v3<br><br>
+<span class="c-cm"># Step 2 — Configure</span><br>
+cp .env.example .env<br>
+<span class="c-cm"># FIREWORKS_API_KEY (smart routing, optional)</span><br>
+<span class="c-cm"># VLLM_BASE_URL (AMD MI300X endpoint)</span><br>
+<span class="c-cm"># ROUTING_THRESHOLD=0 → zero-egress mode</span><br><br>
+<span class="c-cm"># Step 3 — Launch</span><br>
+<span class="c-t">docker compose up</span><br><br>
+<span class="c-g"># → http://localhost:3000</span>
+        </div>
+        <div class="mstrip">
+          <div class="mitem"><div class="mnum r">3</div><div class="mlbl">Commands</div></div>
+          <div class="mitem"><div class="mnum">256K</div><div class="mlbl">vLLM Context</div></div>
+          <div class="mitem"><div class="mnum">$4.12</div><div class="mlbl">ACT I Total</div></div>
+          <div class="mitem"><div class="mnum r">0</div><div class="mlbl">Egress (AIR_GAP=1)</div></div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:8px">🔍 Codebase Analysis</div>
+          <div class="body" style="font-size:14px">Multi-repo context (file tools scoped to the primary repo). SC-TIR (Structured Chain of Tool-Integrated Reasoning) agent loop: PLAN → CALL → OBSERVE → THINK → ANSWER — every step streamed live and persisted to an append-only audit log.</div>
+        </div>
+        <div class="card card-r" style="flex:1">
+          <div class="eye" style="margin-bottom:8px">⚡ CUDA → ROCm Migration</div>
+          <div class="body" style="font-size:14px">Agent identifies CUDA files, applies 39 HIP rules + kernel-launch rewrite, generates an appliable unified diff. Complements AMD HIPIFY for common patterns.</div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:8px">🔒 Security &amp; Compliance Scan</div>
+          <div class="body" style="font-size:14px">OWASP LLM security pattern detection + EU AI Act Article 12 audit trail check. AI-interpreted findings with line-level citations. Under 60 seconds for most repos.</div>
+        </div>
+        <div style="font-size:11px;color:var(--w4);padding:8px 0;line-height:1.7">Modes: (A) Smart routing — short → Gemma 27B (Fireworks); long → MI300X. (B) <span class="mono">AIR_GAP=1</span> — enforced on-prem, Fireworks egress hard-refused. Model-agnostic: swap a Western/open-weight coder (Llama, Mistral) via <span class="mono">VLLM_MODEL</span>.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">06 / 16</div>
+</div>
+
+<!-- ══ S07 AMD MI300X ══
+Model: Qwen3-Coder-Next-FP8 (80B total / 3B active MoE) — verified single-MI300X @256K (ACT I).
+Context claim: 256K window (max-model-len 262144). VRAM from rocm-smi/vLLM logs.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">AMD MI300X · Hardware Advantage</div>
+    <div class="h2" style="margin-bottom:8px">Fits one MI300X.<br>Not one <span class="r">H100.</span></div>
+    <div class="div-r"></div>
+    <div class="flex g36" style="flex:1;margin-top:8px;gap:36px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px">
+        <div class="card card-dim" style="flex:1">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#442222;margin-bottom:14px">SINGLE NVIDIA H100 SXM 80GB — CAN'T HOLD IT</div>
+          <div class="flex g20" style="align-items:flex-end;margin-bottom:14px;flex-wrap:wrap;gap:12px">
+            <div><div class="sm" style="margin-bottom:3px">Model weights (FP8)</div><div style="font-size:26px;font-weight:800;color:var(--w)">~77 GB</div></div>
+            <div style="font-size:24px;color:#333">+</div>
+            <div><div class="sm" style="margin-bottom:3px">KV cache @ 256K ctx</div><div style="font-size:26px;font-weight:800;color:var(--w)">~95 GB</div></div>
+            <div style="font-size:24px;color:#333">=</div>
+            <div><div class="sm" style="margin-bottom:3px">Required VRAM</div><div style="font-size:30px;font-weight:900;color:var(--r)">~172 GB</div></div>
+          </div>
+          <div style="font-size:16px;color:var(--w2)">Single H100 VRAM: <strong style="color:#553333">80 GB</strong> → <strong style="color:var(--r)">single-card OOM. Needs multi-GPU sharding.</strong></div>
+        </div>
+        <div class="card card-r" style="flex:1">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:14px">AMD MI300X 192GB HBM3 — FITS WITH HEADROOM</div>
+          <div class="flex g20" style="align-items:flex-end;margin-bottom:14px;flex-wrap:wrap;gap:12px">
+            <div><div class="sm" style="margin-bottom:3px">Weights</div><div style="font-size:26px;font-weight:800;color:var(--w)">~77 GB</div></div>
+            <div style="font-size:24px;color:#555">+</div>
+            <div><div class="sm" style="margin-bottom:3px">KV cache</div><div style="font-size:26px;font-weight:800;color:var(--w)">~95 GB</div></div>
+            <div style="font-size:24px;color:#555">=</div>
+            <div><div class="sm" style="margin-bottom:3px">Required</div><div style="font-size:26px;font-weight:800;color:var(--w)">~172 GB</div></div>
+            <div style="font-size:24px;color:var(--r)">&lt;</div>
+            <div><div class="sm" style="margin-bottom:3px">MI300X VRAM</div><div style="font-size:30px;font-weight:900;color:var(--r)">192 GB ✓</div></div>
+          </div>
+          <div style="font-size:16px;color:var(--w2)">Single GPU. No tensor parallelism. <strong style="color:var(--w)">+20 GB headroom.</strong></div>
+        </div>
+      </div>
+      <div style="flex:0.65;display:flex;flex-direction:column;gap:16px">
+        <div class="card" style="text-align:center;padding:28px">
+          <div style="font-size:68px;font-weight:900;color:var(--r);letter-spacing:-3px;line-height:1">2.4×</div>
+          <div class="sm" style="margin-top:6px">More VRAM than H100</div>
+        </div>
+        <div class="card" style="text-align:center;padding:28px">
+          <div style="font-size:56px;font-weight:900;color:var(--w);letter-spacing:-2px;line-height:1">256K</div>
+          <div class="sm" style="margin-top:6px">Token context window (vLLM config)</div>
+        </div>
+        <div class="card card-r" style="padding:22px">
+          <div class="sm" style="margin-bottom:6px;color:var(--r);font-weight:700">MODEL · VERIFIED ACT I</div>
+          <div style="font-size:13px;color:var(--w2);line-height:1.6">Qwen3-Coder-Next-FP8 · 80B/3B-active MoE<br>vLLM · AMD ROCm · max-model-len 262144<br><span style="color:var(--w4)">77.29 GiB weights · 94.58 GiB KV pool · 176/192 peak<br>$4.12 · 124 min · Zenodo 10.5281/zenodo.20330468</span></div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--w3);line-height:1.55">Runs across the AMD line: <strong style="color:var(--w)">this ACT II live demo runs on AMD-hosted Fireworks</strong> — every model call is AMD compute — while the 48GB Radeon / MI300X is the <strong style="color:var(--w)">on-prem tier</strong>; the 256K / MI300X figures above are the <strong style="color:var(--w)">verified production tier</strong> (ACT I, real MI300X). <strong style="color:var(--w)">100% AMD · open-weight models only (Gemma / GLM / Qwen) — no OpenAI/Anthropic/Gemini.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">07 / 16</div>
+</div>
+
+<!-- ══ S08 SMART ROUTING ══
+Fixed: model name consistent with vllm_client.py.
+Fixed: SC-TIR acronym expanded here.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Smart Routing · Cost-Efficient Hybrid · Best Use of Gemma</div>
+    <div class="h3" style="margin-bottom:6px">Cheapest model that can do the job. Automatically.</div>
+    <div class="div-r" style="margin-bottom:16px"></div>
+    <div class="flex g36" style="flex:1;gap:36px">
+      <div style="flex:1.2">
+        <div class="code" style="height:95%;font-size:13px;line-height:2.1">
+<span class="c-cm">// tiktoken cl100k_base — token counter</span><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Query<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ count_tokens(context) ]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+&nbsp;&nbsp;┌──────── ROUTING_THRESHOLD ────────┐<br>
+&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;(default: 8,000 tokens, env var)&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+&nbsp;&nbsp;<span class="c-t">BELOW threshold</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a78bfa">ABOVE threshold</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+&nbsp;&nbsp;<span class="c-t">Gemma 27B</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a78bfa">AMD MI300X</span><br>
+&nbsp;&nbsp;Fireworks AI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qwen3-Coder-Next-FP8<br>
+&nbsp;&nbsp;<span class="c-g">~2s · $0.001/q</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-g">15–90s · $0.008–0.05+/q</span><br><br>
+<span class="c-cm">// deep path: Gemma triage selects files →</span><br>
+<span class="c-cm">//   MI300X reasons over the focused subset</span><br>
+<span class="c-cm">// AIR_GAP=1 → MI300X only (triage off)</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+        <div class="card card-r" style="flex:1">
+          <div class="eye" style="margin-bottom:10px">Gemma 27B · Short Queries</div>
+          <div class="body" style="font-size:14px;line-height:1.8">
+            <strong style="color:var(--w)">Model:</strong> accounts/fireworks/models/gemma3-27b-it<br>
+            <strong style="color:var(--w)">Cost:</strong> $0.0009 / 1K tokens · ~$0.001/query<br>
+            <strong style="color:var(--w)">Latency:</strong> 1–3 seconds<br>
+            <strong style="color:var(--w)">Role:</strong> (1) fast tier for sub-8K queries; (2) <strong style="color:var(--w)">first-pass triage</strong> — selects the relevant files so the deep pass isn't fed the whole repo (measured token reduction). Disabled under AIR_GAP=1.<br>
+            <strong style="color:var(--w)">On-prem design:</strong> the open-weight router (Gemma-class) runs on the enterprise's <strong style="color:var(--w)">own AMD GPU</strong>, delegating deep reasoning to AMD-hosted Fireworks. In this ACT II demo <strong style="color:var(--w)">both tiers run on AMD-hosted Fireworks</strong> (Radeon notebook time-boxed) — fewer paid tokens = the enterprise cost-down pattern.<br>
+            <strong style="color:var(--r)">Prize track:</strong> Best Use of Gemma
+          </div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="eye" style="color:#a78bfa;margin-bottom:10px">AMD MI300X · Deep Analysis</div>
+          <div class="body" style="font-size:14px;line-height:1.8">
+            <strong style="color:var(--w)">Model:</strong> Qwen3-Coder-Next-FP8 (80B/3B-active MoE)<br>
+            <strong style="color:var(--w)">Cost:</strong> $0.00028 / 1K tokens<br>
+            <strong style="color:var(--w)">Latency:</strong> 15–90 seconds<br>
+            <strong style="color:var(--w)">Context:</strong> 256K tokens (max-model-len 262144, verified)
+          </div>
+        </div>
+        <div class="card" style="flex:0.7;padding:18px 24px">
+          <div class="eye" style="margin-bottom:8px">SC-TIR Agent</div>
+          <div class="body" style="font-size:13px"><strong style="color:var(--w)">Structured Chain of Tool-Integrated Reasoning.</strong> Every query runs through PLAN → CALL → OBSERVE → THINK → ANSWER, streaming each step live to the UI.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">08 / 16</div>
+</div>
+
+<!-- ══ S09 SC-TIR AGENT ══ -->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">SC-TIR · Structured Chain of Tool-Integrated Reasoning</div>
+    <div class="h3" style="margin-bottom:6px">Not a chatbot. A reasoning agent. Every step visible.</div>
+    <div class="div-r" style="margin-bottom:16px"></div>
+    <div class="flex g36" style="flex:1;gap:36px">
+      <div style="flex:1.2">
+        <div class="code" style="height:100%;font-size:13px;line-height:2.0">
+<span class="c-cm">// Max 6 tool calls · 8 loop iterations</span><br>
+<span class="c-cm">// Every step streamed as SSE event to UI</span><br><br>
+<span style="color:#60a5fa;font-weight:700">PLAN:</span>&nbsp;&nbsp; Analyze authentication module for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LLM06 (Sensitive Info Disclosure).<br><br>
+<span style="color:#fbbf24;font-weight:700">CALL:</span>&nbsp;&nbsp; list_files("src/auth")<br><br>
+<span class="c-cm">OBSERVE: src/auth/jwt.py</span><br>
+<span class="c-cm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src/auth/middleware.py</span><br><br>
+<span style="color:#c4b5fd;font-weight:700">THINK:</span>&nbsp;&nbsp; jwt.py is the risk surface.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grep for hardcoded secrets.<br><br>
+<span style="color:#fbbf24;font-weight:700">CALL:</span>&nbsp;&nbsp; grep_codebase("SECRET_KEY")<br><br>
+<span class="c-cm">OBSERVE: Line 12: SECRET_KEY="sk-prod-..." ⚠</span><br><br>
+<span style="color:#4ade80;font-weight:700">ANSWER:</span> <span style="color:#4ade80">LLM06 confirmed — Line 12.</span><br>
+<span style="color:#4ade80">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remediation: use os.getenv().</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:11px">
+        <div style="display:flex;gap:12px;flex:1">
+          <div class="card" style="flex:1">
+            <div class="eye" style="color:#60a5fa;margin-bottom:8px">PLAN</div>
+            <div class="body" style="font-size:13px">Transparent strategy before acting. Auditors see the reasoning chain — required for explainability compliance.</div>
+          </div>
+          <div class="card" style="flex:1">
+            <div class="eye" style="color:#fbbf24;margin-bottom:8px">CALL</div>
+            <div class="body" style="font-size:13px">6 tools: read_file · grep_codebase · list_files · git_log · migrate_cuda_to_rocm · compliance_scan</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex:1">
+          <div class="card" style="flex:1">
+            <div class="eye" style="color:#94a3b8;margin-bottom:8px">OBSERVE</div>
+            <div class="body" style="font-size:13px">Tool results injected into context. Agent works on real code data — no hallucinated line numbers.</div>
+          </div>
+          <div class="card" style="flex:1">
+            <div class="eye" style="color:#c4b5fd;margin-bottom:8px">THINK</div>
+            <div class="body" style="font-size:13px">Explicit chain-of-thought before next action. Streamed to UI — every inference visible.</div>
+          </div>
+        </div>
+        <div class="card card-r" style="flex:0.7">
+          <div class="eye" style="margin-bottom:8px">The AI Flight Recorder</div>
+          <div class="body" style="font-size:13px">Every SC-TIR step is persisted to the <strong style="color:var(--w)">AI Flight Recorder</strong> — a <strong style="color:var(--w)">tamper-evident, SHA-256 hash-chained + Ed25519-signed</strong> append-only log. Any incident replays bit-exact; third-party verifiable, auditor-legible, aligned to EU AI Act Article 12.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">09 / 16</div>
+</div>
+
+<!-- ══ S10 CUDA → ROCm ══
+Fixed: honest about pattern-based migration. Removed "Live Demo PR" fabricated claim.
+New framing: "automated pattern migration" — honest and still impressive.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">CUDA → ROCm Migration · AMD-Native Feature</div>
+    <div class="h2" style="margin-bottom:8px">NVIDIA built a <span class="r">$3T CUDA moat.</span><br>We automated the bridge.</div>
+    <div class="div-r"></div>
+    <div class="flex g36" style="flex:1;margin-top:8px;gap:36px">
+      <div style="flex:1.1">
+        <div class="code" style="height:100%;font-size:13px;line-height:1.8">
+<span class="c-cm">--- original.cu</span><br>
+<span class="c-cm">+++ converted.hip.cpp</span><br>
+<span class="c-cm">@@ 39 rules + kernel-launch rewrite @@</span><br><br>
+<span class="c-r">-#include &lt;cuda_runtime.h&gt;</span><br>
+<span class="c-g">+#include &lt;hip/hip_runtime.h&gt;</span><br><br>
+<span class="c-r">-  cudaMalloc(&amp;d_A, bytes);</span><br>
+<span class="c-g">+  hipMalloc(&amp;d_A, bytes);</span><br><br>
+<span class="c-r">-  cudaMemcpy(d_A, h_A, cudaMemcpyHostToDevice);</span><br>
+<span class="c-g">+  hipMemcpy(d_A, h_A, hipMemcpyHostToDevice);</span><br><br>
+<span class="c-r">-  cudaEvent_t start, stop;</span><br>
+<span class="c-g">+  hipEvent_t start, stop;</span><br><br>
+<span class="c-r">-  cudaStreamCreate(&amp;stream);</span><br>
+<span class="c-g">+  hipStreamCreate(&amp;stream);</span><br><br>
+<span class="c-r">-  cudaDeviceSynchronize();</span><br>
+<span class="c-g">+  hipDeviceSynchronize();</span><br><br>
+<span class="c-r">-  matmul&lt;&lt;&lt;grid, block, 0, stream&gt;&gt;&gt;(...);</span><br>
+<span class="c-g">+  hipLaunchKernelGGL(matmul, grid, block, 0, stream, ...);</span><br><br>
+<span class="c-cm"># 39 rules + kernel-launch. difflib unified diff (git apply-clean).</span><br>
+<span class="c-cm"># cuBLAS/cuDNN calls, Thrust, PTX → roadmap (AI-guided).</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px">
+        <div class="card" style="text-align:center;padding:28px">
+          <div style="font-size:72px;font-weight:900;color:var(--r);letter-spacing:-3px;line-height:1">39</div>
+          <div class="sm" style="margin-top:5px">CUDA→HIP rules + kernel-launch rewrite</div>
+        </div>
+        <div class="card card-r" style="flex:1">
+          <div class="eye" style="margin-bottom:10px">How It Works</div>
+          <div class="body" style="font-size:14px;line-height:1.75">The agent finds CUDA files and calls the migration tool, which applies 39 API-mapping rules (memory/stream/event/device/error + math-library headers) <strong style="color:var(--w)">and rewrites kernel-launch syntax</strong> (<span class="mono">kernel&lt;&lt;&lt;grid,block&gt;&gt;&gt;</span> → <span class="mono">hipLaunchKernelGGL</span>), emitting an <strong style="color:var(--w)">appliable unified diff</strong> (git apply-clean).<br><br><strong style="color:var(--w)">Unit-tested against demo/cuda_sample.cu. Complements AMD HIPIFY.</strong></div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:10px">Why AMD Wins This</div>
+          <div class="body" style="font-size:14px;line-height:1.75">50M+ lines of CUDA code on GitHub. The #1 barrier to AMD GPU adoption is migration friction. REPOMIND removes it automatically. <strong style="color:var(--w)">Roadmap: AI-guided migration for non-trivial CUDA patterns (custom kernels, PTX).</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">10 / 16</div>
+</div>
+
+<!-- ══ S11 COMPLIANCE SCAN ══
+Scope: "OWASP LLM security pattern scan" (honest — heuristic, not a certified control).
+Ed25519 audit signing is SHIPPED (audit.py sign + verify_signatures, tested).
+Scan-time: one number used throughout.
+Fixed: EU AI Act category — honest about scope.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Security &amp; Compliance Scan</div>
+    <div class="h3" style="margin-bottom:6px">A heuristic pre-scan in <span class="r">under 60 seconds.</span><br>Flags surfaces for human review — not a certified control.</div>
+    <div class="div-r" style="margin-bottom:16px"></div>
+    <div class="flex g36" style="flex:1;gap:36px">
+      <div style="flex:1.2">
+        <div class="code" style="height:100%;font-size:13px;line-height:1.9">
+<span class="c-cm">REPOMIND HEURISTIC PRE-SCAN — enterprise-repo</span><br>
+<span class="c-cm">NOT a certified control. Flags for human review.</span><br>
+<span class="c-cm">══════════════════════════════════════</span><br><br>
+<span class="c-g">LLM01</span> Prompt Injection surfaces:&nbsp;<span class="c-cm">— no match</span><br>
+<span class="c-r">LLM02</span> Insecure Output:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-r">⚠ REVIEW</span><br>
+<span class="c-cm">&nbsp;&nbsp;&nbsp;&nbsp;ui/render.ts:47: innerHTML = …</span><br>
+<span class="c-r">LLM06</span> Sensitive Info Disclosure:<span class="c-r">⚠ REVIEW</span><br>
+<span class="c-cm">&nbsp;&nbsp;&nbsp;&nbsp;auth/jwt.py:12: api_key = "sk-prod-…"</span><br>
+<span class="c-g">LLM07</span> Unvalidated Outbound Call:&nbsp;<span class="c-cm">— no match</span><br>
+<span class="c-g">LLM10</span> Untrusted Deserialization:<span class="c-cm">— no match</span><br><br>
+EU AI Act Art. 12 indicator:<br>
+&nbsp;&nbsp;<span class="c-g">logging/audit API usage detected</span><br><br>
+<span class="c-cm">Findings cite real file:line. ~45s.</span><br>
+<span class="c-cm">Word-boundary matching (no substring noise).</span><br>
+<span class="c-cm">Hash-chained + Ed25519-signed (verify_signatures)</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:8px">5 OWASP-LLM Risk Surfaces (heuristic)</div>
+          <div class="body" style="font-size:13px">Word-boundary detection across LLM01, LLM02, LLM06, LLM07, LLM10 with real file:line citations. A heuristic pre-scan, <strong style="color:var(--w)">not a certified control</strong> — a clear result is not an assurance. Extensible to full Top 10 (roadmap).</div>
+        </div>
+        <div class="card card-r" style="flex:1">
+          <div class="eye" style="margin-bottom:8px">EU AI Act Article 12</div>
+          <div class="body" style="font-size:13px">Detects presence/absence of audit logging in your AI system codebase. Article 12 requires audit trails for AI systems — REPOMIND flags the gap before your compliance team does. <strong style="color:var(--w)">Note: applicability depends on AI system risk classification.</strong></div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:8px">Shipped: AI Flight Recorder</div>
+          <div class="body" style="font-size:13px"><strong style="color:var(--w)">Shipped:</strong> the <strong style="color:var(--w)">AI Flight Recorder</strong> — Ed25519-signed, hash-chained audit records. Regulators/auditors verify each record's authenticity with the public key (verify_signatures) — an immutable, third-party-verifiable, replayable evidence chain, not just plain text.</div>
+        </div>
+        <div class="quote" style="padding:12px 18px">
+          <div style="font-size:12px;color:var(--w4)">Goldman Sachs compliance gap: <strong style="color:var(--w)">identified under 60 seconds.</strong> EU AI Act enforcement: <strong style="color:var(--r)">weeks away.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">11 / 16</div>
+</div>
+
+<!-- ══ S12 TRACK RECORD ══
+Fixed: CVPR honest — "Kaggle LB #2 / Official rank 6/7 post-eval."
+Fixed: AMD testimonial honest — it was for v1/v2, now building v3.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Track Record · Solo Builder · Tashkent, Uzbekistan</div>
+    <div class="h2" style="margin-bottom:8px">ACT I winner. CVPR co-author.<br>Building in <span class="r">public.</span></div>
+    <div class="div-r"></div>
+    <div class="flex g28" style="flex:1;margin-top:8px;gap:28px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px">
+        <div class="card card-r" style="flex:1">
+          <div class="eye" style="margin-bottom:12px">🏆 AMD HACKATHON ACT I — 1ST PLACE</div>
+          <div style="font-size:22px;font-weight:800;color:var(--w);margin-bottom:8px">1st Place AI Agents + Outstanding Social Engagement</div>
+          <div class="body" style="font-size:14px">Prize: AMD Radeon™ AI PRO R9700 + cash. AMD published official developer testimonial naming REPOMIND + RZS. 124-minute benchmark, 62 data points, $4.12 total. Zenodo DOI 10.5281/zenodo.20330468. <strong style="color:var(--w)">Reproducible — every step documented.</strong></div>
+        </div>
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:12px">📄 CVPR 2026 WORKSHOP — CO-AUTHOR</div>
+          <div style="font-size:20px;font-weight:800;color:var(--w);margin-bottom:8px">"The First AI Children Gait Challenge"</div>
+          <div class="body" style="font-size:14px">CVPR 2026 Workshop Proceedings. Public Kaggle LB: #2 / 56 teams. Official post-evaluation rank: 6/7 (formula changed 0.5/0.5 → 0.7S1+0.3S2 at eval). <strong style="color:var(--w)">Co-author credit on proceedings paper confirmed regardless of final rank.</strong></div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px">
+        <div class="card" style="flex:1">
+          <div class="eye" style="margin-bottom:12px">🔬 3 ZENODO PREPRINTS · ORCID VERIFIED</div>
+          <div class="body" style="font-size:15px;line-height:1.95">
+            REPOMIND v1 — DOI 10.5281/zenodo.20330468<br>
+            TriageGuard (Healthcare AI) — DOI 10.5281/zenodo.20445507<br>
+            ECB LLM paper — DOI 10.5281/zenodo.19791329<br>
+            ORCID: 0009-0007-0731-4247<br>
+            <strong style="color:var(--w)">Apache 2.0 · MIT · All reproducible.</strong>
+          </div>
+        </div>
+        <div class="card card-r" style="flex:1">
+          <div class="eye" style="margin-bottom:12px">The Pattern</div>
+          <div style="font-size:18px;font-weight:700;color:var(--w);margin-bottom:10px;line-height:1.35">Solo. Uzbekistan. Winning global competitions. Building real infrastructure.</div>
+          <div class="body" style="font-size:13px">Not a team of 20. One developer, verified benchmarks, public preprints, open source. The trajectory: hackathon → CVPR → enterprise infrastructure. <strong style="color:var(--w)">Each step reproducible.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">12 / 16</div>
+</div>
+
+<!-- ══ S13 ROI MATRIX ══
+Productivity math: McKinsey ~37% is a task-level coding speedup → ranged $1–2B recoverable, not 37% of payroll.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Business Cases · Enterprise ROI</div>
+    <div class="h3" style="margin-bottom:6px">The math is simple. The regulatory risk is not.</div>
+    <div class="div-r" style="margin-bottom:18px"></div>
+    <div class="flex g24" style="flex:1">
+      <div class="card" style="flex:1">
+        <div class="eye" style="margin-bottom:14px">JP MORGAN CHASE</div>
+        <div style="font-size:56px;font-weight:900;color:var(--r);letter-spacing:-3px;line-height:1;margin-bottom:4px">~$1–2B</div>
+        <div class="sm" style="margin-bottom:18px">Recoverable productivity / yr (est.)</div>
+        <div style="height:1px;background:#1E1E1E;margin-bottom:18px"></div>
+        <div class="body" style="font-size:14px;line-height:1.9">
+          50,000 devs · McKinsey ~37% is a <strong style="color:var(--w)">task-level</strong> speedup<br>
+          on coding tasks (~20-40% of dev time), not 37%<br>
+          of total comp → recoverable value ≈ <strong style="color:var(--w)">$1–2B/yr</strong><br><br>
+          REPOMIND on-prem license: <strong style="color:var(--w)">$0.5–2M/yr</strong><br>
+          Payback: <strong style="color:var(--r)">months, after a 6–18mo sales cycle</strong>
+        </div>
+      </div>
+      <div class="card card-r" style="flex:1">
+        <div class="eye" style="margin-bottom:14px">APPLE INC.</div>
+        <div style="font-size:56px;font-weight:900;color:var(--r);letter-spacing:-3px;line-height:1;margin-bottom:4px">$1B+</div>
+        <div class="sm" style="margin-bottom:18px">IP leak exposure per incident</div>
+        <div style="height:1px;background:#1E1E1E;margin-bottom:18px"></div>
+        <div class="body" style="font-size:14px;line-height:1.9">
+          30,000+ engineers · $200–400K/yr<br>
+          IP leak: <strong style="color:var(--w)">$100M–$1B per event</strong><br>
+          REPOMIND: zero egress (MI300X mode)<br><br>
+          All code stays in Apple's datacenter.<br>
+          <strong style="color:var(--r)">Risk reduction: eliminates surface entirely.</strong>
+        </div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="eye" style="margin-bottom:14px">GOLDMAN + EU ENTERPRISES</div>
+        <div style="font-size:56px;font-weight:900;color:var(--r);letter-spacing:-3px;line-height:1;margin-bottom:4px">€7.5–35M</div>
+        <div class="sm" style="margin-bottom:18px">EU AI Act penalty tiers²</div>
+        <div style="height:1px;background:#1E1E1E;margin-bottom:18px"></div>
+        <div class="body" style="font-size:14px;line-height:1.9">
+          EU AI Act obligations phase in <strong style="color:var(--w)">through 2026</strong><br>
+          Public statements on immature AI governance¹<br>
+          REPOMIND: Art. 12 record-keeping <em>indicator</em><br><br>
+          A record-keeping gap sits in the <strong style="color:var(--w)">≤€7.5M tier</strong><br>
+          <span style="font-size:11px;color:var(--w4)">Applicability depends on AI-system risk classification.</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px" class="quote">
+      <span style="font-size:13px;color:var(--w3)">Value at risk across the segment is large (billions in recoverable productivity + tiered regulatory exposure + IP-leak risk). <strong style="color:var(--w)">Serviceable revenue is a fraction of that</strong> — see the revenue model. <strong style="color:var(--r)">Few combine on-prem + AMD-native today.</strong></span>
+    </div>
+  </div>
+  <div class="sn">13 / 16</div>
+</div>
+
+<!-- ══ S14 REVENUE MODEL ══ NEW SLIDE
+Addresses the #1 gap identified by YC, Shark Tank, and VC judges: zero pricing in the deck.
+-->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Revenue Model · Enterprise SaaS + Usage</div>
+    <div class="h3" style="margin-bottom:6px">Open source core. Enterprise features commercial.</div>
+    <div class="div-r" style="margin-bottom:18px"></div>
+    <div class="flex g24" style="margin-bottom:24px">
+      <div class="card" style="flex:1;text-align:center">
+        <div class="eye" style="margin-bottom:12px">STARTER</div>
+        <div style="font-size:48px;font-weight:900;color:var(--w);letter-spacing:-2px;line-height:1">$500</div>
+        <div class="sm" style="margin-bottom:14px">/month</div>
+        <div style="height:1px;background:#222;margin-bottom:14px"></div>
+        <div class="body" style="font-size:13px;text-align:left;line-height:2">
+          ✓ 1 team, up to 10 users<br>
+          ✓ Public repos only<br>
+          ✓ Gemma 27B routing<br>
+          ✓ OWASP pattern scan<br>
+          ✗ On-prem MI300X<br>
+          ✗ Signed reports
+        </div>
+      </div>
+      <div class="card card-r" style="flex:1;text-align:center">
+        <div class="eye" style="margin-bottom:12px;color:var(--r)">PROFESSIONAL</div>
+        <div style="font-size:48px;font-weight:900;color:var(--r);letter-spacing:-2px;line-height:1">$2,500</div>
+        <div class="sm" style="margin-bottom:14px">/month</div>
+        <div style="height:1px;background:#2a1010;margin-bottom:14px"></div>
+        <div class="body" style="font-size:13px;text-align:left;line-height:2">
+          ✓ 25 users<br>
+          ✓ Private repos<br>
+          ✓ On-prem Docker deploy<br>
+          ✓ Compliance reports<br>
+          ✓ Priority support<br>
+          ✗ Air-gapped mode
+        </div>
+      </div>
+      <div class="card" style="flex:1;text-align:center;border-color:#333">
+        <div class="eye" style="margin-bottom:12px">ENTERPRISE</div>
+        <div style="font-size:48px;font-weight:900;color:var(--w);letter-spacing:-2px;line-height:1">$15K</div>
+        <div class="sm" style="margin-bottom:14px">/month</div>
+        <div style="height:1px;background:#222;margin-bottom:14px"></div>
+        <div class="body" style="font-size:13px;text-align:left;line-height:2">
+          ✓ Unlimited users<br>
+          ✓ Air-gapped MI300X mode<br>
+          ✓ CUDA→ROCm migration<br>
+          ✓ Ed25519-signed audit log<br>
+          ✓ SLA + dedicated support<br>
+          ✓ Custom procurement
+        </div>
+      </div>
+      <div class="card card-r" style="flex:1;text-align:center">
+        <div class="eye" style="margin-bottom:12px">AMD CLOUD</div>
+        <div style="font-size:48px;font-weight:900;color:var(--r);letter-spacing:-2px;line-height:1">Usage</div>
+        <div class="sm" style="margin-bottom:14px">-based</div>
+        <div style="height:1px;background:#2a1010;margin-bottom:14px"></div>
+        <div class="body" style="font-size:13px;text-align:left;line-height:2">
+          ✓ Pay-per-query<br>
+          ✓ $0.008–0.05+/deep query<br>
+          ✓ $0.001/short query<br>
+          ✓ AMD Developer Cloud<br>
+          ✓ No infra overhead<br>
+          ✓ Global availability
+        </div>
+      </div>
+    </div>
+    <div class="flex g20">
+      <div class="card" style="flex:1;padding:18px 24px">
+        <div class="eye" style="margin-bottom:8px">Why Enterprise Buys</div>
+        <div class="body" style="font-size:13px">Demand is driven by productivity recovery + risk reduction. Even a modest slice of the $1–2B recoverable productivity dwarfs a $180K/yr license. Regulatory pressure adds urgency (tiered penalties²).</div>
+      </div>
+      <div class="card card-r" style="flex:1;padding:18px 24px">
+        <div class="eye" style="margin-bottom:8px">Open Source Core Strategy</div>
+        <div class="body" style="font-size:13px">Core agent + tools MIT-licensed. Enterprise features (air-gap mode, signed reports, SLA) commercial. Classic Elastic/HashiCorp model — community builds trust, enterprise pays.</div>
+      </div>
+      <div class="card" style="flex:1;padding:18px 24px">
+        <div class="eye" style="margin-bottom:8px">ACT I Traction = First Signal</div>
+        <div class="body" style="font-size:13px">AMD official testimonial + 1st place = validated by hardware vendor. Next milestone: one enterprise pilot conversation post-hackathon. Target: Q3 2026.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sn">14 / 16</div>
+</div>
+
+<!-- ══ S15 ROADMAP ══ -->
+<div class="slide red-bar">
+  <div class="pad flex col" style="height:100%">
+    <div class="eye">Platform Roadmap · From a Product to the Layer</div>
+    <div class="h2" style="margin-bottom:8px">REPOMIND is the <span class="r">trust + cost layer</span><br>for on-prem enterprise AI on AMD.</div>
+    <div class="div-r"></div>
+    <div class="mstrip" style="margin-bottom:22px;margin-top:8px">
+      <div class="mitem"><div class="mnum r">Jul 11</div><div class="mlbl">ACT II Submit</div></div>
+      <div class="mitem"><div class="mnum">Jul 12</div><div class="mlbl">Show HN Launch</div></div>
+      <div class="mitem"><div class="mnum">Q3 2026</div><div class="mlbl">First Pilot</div></div>
+      <div class="mitem"><div class="mnum r">Q4 2026</div><div class="mlbl">SOC2 Path + SLA</div></div>
+    </div>
+    <div class="flex g24" style="flex:1">
+      <div class="card card-r" style="flex:1">
+        <div class="eye" style="margin-bottom:10px">Tier 1 · Core — Shipped (ACT II)</div>
+        <div class="body" style="font-size:13px;line-height:1.9">
+          ✓ On-prem coding agent on AMD (Radeon → MI300X)<br>
+          ✓ Gemma-local → Fireworks routing + <strong style="color:var(--w)">measured cost layer</strong><br>
+          ✓ <strong style="color:var(--w)">AI Flight Recorder</strong> (Ed25519 tamper-evident)<br>
+          ✓ CUDA→ROCm · air-gap · compliance pre-scan<br>
+          <span style="color:var(--w4)">skeleton −89% · cache: repeat ctx −90% input · 38 tests · Docker</span>
+        </div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="eye" style="margin-bottom:10px">Tier 2 · Trust &amp; Governance — Near-term</div>
+        <div class="body" style="font-size:13px;line-height:1.9">
+          → Cost &amp; Savings FinOps panel (live $ saved)<br>
+          → Self-verifying answers (local verifier)<br>
+          → PII redaction gateway (pre-egress)<br>
+          → Continuous on-prem red-team<br>
+          → Sovereign RAG over regulated corpora
+        </div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="eye" style="margin-bottom:10px">Tier 3 · Sovereign &amp; Regulated — Horizon</div>
+        <div class="body" style="font-size:13px;line-height:1.9">
+          → Sovereign AI-in-a-box for regulators<br>
+          → Verifiable unlearning (GDPR Art. 17)<br>
+          → AI-decision insurance / underwriting<br>
+          → Carbon + cost-aware routing<br>
+          → Trusted AI metering standard
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px" class="quote">
+      <span style="font-size:12px;color:var(--w3)">Every tier runs on the same spine: <strong style="color:var(--w)">cheap open-weight compute on the customer's own AMD GPU on-prem, bursting to AMD-hosted Fireworks only when it pays to</strong> — the economics that make the whole platform defensible. <strong style="color:var(--w)">Tier 1 is shipped; Tiers 2–3 are roadmap, not claims.</strong></span>
+    </div>
+  </div>
+  <div class="sn">15 / 16</div>
+</div>
+
+<!-- ══ S16 CTA ══ -->
+<div class="slide red-bar">
+  <div class="flex col center" style="width:100%;height:100%;padding:0 120px">
+    <div style="max-width:900px">
+      <div class="eye" style="margin-bottom:24px">Deploy It. Right Now.</div>
+      <div class="h1" style="font-size:96px;margin-bottom:16px">REPO<span class="r">MIND</span><br>v3</div>
+      <div class="div-r" style="margin-bottom:22px"></div>
+      <div class="code" style="font-size:20px;line-height:2.2;margin-bottom:32px;display:inline-block">
+<span style="color:#333">git clone</span> github.com/SRKRZ23/repomind-v3<br>
+<span style="color:#333">cp</span> .env.example .env<br>
+<span class="c-t">docker compose up</span>
+      </div>
+      <div class="flex g14" style="margin-bottom:36px;flex-wrap:wrap;gap:12px">
+        <span class="badge b-r" style="padding:6px 16px;font-size:11px">github.com/SRKRZ23/repomind-v3</span>
+        <span class="badge b-w" style="padding:6px 16px;font-size:11px">AMD ACT II · Track 3 Unicorn</span>
+        <span class="badge b-g" style="padding:6px 16px;font-size:11px">🏆 ACT I 1st Place</span>
+        <span class="badge b-r" style="padding:6px 16px;font-size:11px">Gemma 27B · Fireworks AI</span>
+        <span class="badge b-w" style="padding:6px 16px;font-size:11px">MIT License · Open Source</span>
+      </div>
+      <div class="flex g32" style="margin-bottom:28px">
+        <div class="card" style="padding:16px 22px;flex:1;text-align:center">
+          <div style="font-size:28px;font-weight:900;color:var(--r)">$500–$15K</div>
+          <div class="sm" style="margin-top:3px">Monthly enterprise tiers</div>
+        </div>
+        <div class="card card-r" style="padding:16px 22px;flex:1;text-align:center">
+          <div style="font-size:28px;font-weight:900;color:var(--w)">$1–2B</div>
+          <div class="sm" style="margin-top:3px">Recoverable productivity / yr (est.)</div>
+        </div>
+        <div class="card" style="padding:16px 22px;flex:1;text-align:center">
+          <div style="font-size:28px;font-weight:900;color:var(--r)">Aug 2026</div>
+          <div class="sm" style="margin-top:3px">EU AI Act enforcement</div>
+        </div>
+      </div>
+      <div style="font-size:14px;color:var(--w4);line-height:1.9">
+        Built by <strong style="color:var(--w)">Sardor Razikov</strong> · Solo researcher, Tashkent, Uzbekistan<br>
+        CVPR 2026 Workshop Co-Author · ORCID 0009-0007-0731-4247 · 3 Zenodo preprints · AMD ACT I 1st Place
+      </div>
+    </div>
+  </div>
+  <div class="sn">16 / 16</div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+let cur=0;
+const dotsEl=document.getElementById('dots');
+for(let i=0;i<total;i++){
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=()=>go(i);
+  dotsEl.appendChild(d);
+}
+function scale(){
+  const vw=window.innerWidth,vh=window.innerHeight;
+  const s=Math.min(vw/1920,vh/1080);
+  const deck=document.getElementById('deck');
+  deck.style.transform=`scale(${s})`;
+  deck.style.position='absolute';
+  deck.style.left=((vw-1920*s)/2)+'px';
+  deck.style.top=((vh-1080*s)/2)+'px';
+}
+function go(n){
+  slides[cur].classList.remove('active');
+  dotsEl.querySelectorAll('.dot')[cur].classList.remove('on');
+  cur=(n+total)%total;
+  slides[cur].classList.add('active');
+  dotsEl.querySelectorAll('.dot')[cur].classList.add('on');
+}
+window.addEventListener('resize',scale);
+scale();
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+  if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+});
+document.getElementById('deck').addEventListener('click',e=>{
+  if(e.clientX>window.innerWidth/2)go(cur+1);else go(cur-1);
+});
+</script>
+</body>
+</html>
