@@ -46,6 +46,8 @@ AMD-192 GB-per-card workload by construction.
 
 ## 🆕 New in v3 (built for ACT II — distinct from the ACT I repo)
 
+**Version history:** **v1** — the ACT I winner (repo-scale coding agent, benchmarked on MI300X, [Zenodo](https://doi.org/10.5281/zenodo.20330468)); **v2** — the web-UI iteration (Vercel + Supabase → MI300X vLLM); **v3** — this ACT II build: the on-prem **cost + trust layer** (agent + LLM cost-router). Sequential — not a skip. _(The lablab team may still read "v2"; the project is v3.)_
+
 REPOMIND v3 is a **new codebase** for the Unicorn track, not a re-submission of ACT I. New work:
 **Gemma load-bearing triage** (`triage.py`) · **Ed25519-signed + SHA-256 hash-chained tamper-evident
 audit log** with key-pinning (`audit.py`) · **API auth** (constant-time) · **enforced air-gap egress

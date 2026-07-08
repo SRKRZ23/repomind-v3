@@ -26,3 +26,10 @@ dist/
 # IDE
 .vscode/
 .idea/
+
+# private / person-tailored / superseded decks (keep local, not public)
+slides/pitch_amd_malini.*
+slides/nick_ni_leavebehind.*
+slides/presentation.pdf.bak
+slides/financial_appendix.*
+slides/pitch_financial_appendix.*
